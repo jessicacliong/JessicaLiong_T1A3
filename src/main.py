@@ -20,4 +20,8 @@ def user_sleep_input():
   outputDictWriter.writeheader()
   outputDictWriter.writerow({'Date': date, 'Hours of Sleep': hours_of_sleep, 'Quality of Sleep': quality_of_sleep, 'Caffeine': caffeine, 'Blue Screen': blue_screen, 'Screen Time': screen_time, 'Comments': comments, 'Other Comments': other_comments})
 
+def sleep_tip():
+  generate random tip from file 
+  print(random tip)
+
 user_sleep_input()
