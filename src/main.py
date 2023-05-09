@@ -12,16 +12,21 @@ def user_sleep_input():
     other_comments = ('')
     print("Thank you for using Snooze It. Your data has been saved! ")
   else:
-    other_comments = input("Please enter comments: (Press Enter to Continue) ")
+    other_comments = input("Please enter comments: (Press <Enter> to Continue) ")
     print("Thank you for using Snooze It. Your data has been saved! ")
  
   outputFile = open('user_information.csv', 'a', newline='')
   outputDictWriter = csv.DictWriter(outputFile, ['Date', 'Hours of Sleep', 'Quality of Sleep', 'Caffeine', 'Blue Screen', 'Screen Time', 'Comments', 'Other Comments'])
+  #read 1st row of csv file,
+  # if header missing:
   outputDictWriter.writeheader()
+  #if header exists, continue
+  
   outputDictWriter.writerow({'Date': date, 'Hours of Sleep': hours_of_sleep, 'Quality of Sleep': quality_of_sleep, 'Caffeine': caffeine, 'Blue Screen': blue_screen, 'Screen Time': screen_time, 'Comments': comments, 'Other Comments': other_comments})
 
 def sleep_tip():
-  generate random tip from file 
+  generate random tip from separate file 
   print(random tip)
 
 user_sleep_input()
+sleep_tip()
