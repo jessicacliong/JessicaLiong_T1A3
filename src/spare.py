@@ -1,0 +1,1 @@
+outputFile = open('user_information.csv', 'a', newline='') 
