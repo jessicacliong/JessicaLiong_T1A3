@@ -31,8 +31,7 @@ def sleep_tip():
     print(f'Fun Sleep Tip: {random.choice(sleep_tips)}')
 
 def filtered_sleep_input():
-  pd.read_csv()
-
+  
 # user_input()
 # # write_user_input()
 # sleep_tip()
