@@ -32,7 +32,7 @@ The application allows users to write down comments and factors during the day o
 Gives user reports of their sleep time, quality and other factors or comments associated with that sleep within certain time perioeds. I have filtered them to 1 week, 1 month and 3 months.
 
 ### 3. Suggest Tips on better Sleep
-Gives users useful tips to help them gain ample quantity and quality sleep for a more productive day 
+Gives users useful tips to help them gain ample quantity and quality sleep for a more productive day
 
 ## Implementation Plan
 
@@ -42,31 +42,46 @@ Every time a task is completed, the date deadline box can be clicked to give a g
 
 Figure 1 shows my trello board on the 6th of May
 
+Figure 3 shows my trello board on the 19th of May
 
-Figure 2 shows my trello board on the 11th of May
+Figure 4 shows my trello board on the 21st of May
 
 
 ## Psuedocodes
 
-As a part of my implementation plan, I decided to write pseudocodes to outline the workings of each application features, methods and functions that will be used to accomplish the set features with python coding.
+As a part of my implementation plan, I have written pseudocodes to outline the methods and functions that will be used to accomplish the features of my application utilising python code.
 
 __Feature 1 - Request User inputs on a range of sleep information (High Priority)__
 
-1. Open NewCSV for file UniqueIndividual
-2. Prompt User Range of SleepInformation
-3. Write Input with DictWriter into CSVFile
-4. Utilise pandas to output Data by Date
+1. UserInformation CSV Created Prior to SleepInformationInput
+2. Prompt User With SleepInformationInput
+3. Write RowInputs With DictWriter into CSVFile
 
-__Feature 2 - Filter Inputs to 1 week, 1 month and 3 months (High Priority)__
+__Feature 2 - Ouput Previous Sleep Log Based on Date (High Priority)__
 
-1. Utilise PandasModule to Filter User’sSleepInformation to 1Week, 1Month and 3Months
+1. Import PandasModule
+2. Filter UserSleepInformation to ReadDates
+3. Obtain Date
+4. Print Output onto CSVFile
+
+or 
+
+1. PromptUser To View A PreviousLog
+2. PromptUser Enter InputDate (YYYY-MM-DD)
+3. Read CSV File using DictReader using InputDate as Filter/Key
+4. Print Output Onto UserTerminal 
 
 
-__Feature 3 - Helpful Sleeping Tips (High Priority)__
+__Feature 3 - Ouput Sleeping Tip (High Priority)__
 
-After SleepInformation SuccessfulEntries, Display SleepingTips for User
+1. After SleepInformationInput
+2. Create ListOfSleepTips on CsvFile
+3. ReadFunction CSVModule To Read SleepingTip From Sleep_Tips.Csv File
+4. RandomModule 
+5. Print SleepingTip
 
-__Feature 4 - LogIn Feature (Low Priority)__  
+__Feature 4 - Login Feature (If Time Permiting)__  
+
 1. Log In Menu, Prompts 2 Options:
 	a. Create NewUser
 	b. Login As Existing User
@@ -76,9 +91,9 @@ a. Creating NewUser
 i. Creating NewUsername
     - UserInput To CreateNewUsername
     - CrossCheck Database 
-      	If Exists, Enter Different Username
-      Loop Until input is Unique
- When successful, Save to Database
+      	If Exists, Enter DifferentUsername
+      Loop Until inputisUnique
+ When successful, Saveto Database
 
 ii. Create NewPassword 
     - UserInput to CreateNewPassword
@@ -110,10 +125,43 @@ ii. Match Existing Password
 		If Matching, 
 			Grant as success and return Password 
 
-Welcome {username}
+Welcome username
 
 ## Installation Instructions
 
 ## Dependencies
 
-## Sources
+## References
+
+__Python Coding__
+
+https://automatetheboringstuff.com/2e/chapter16/
+
+
+https://stackoverflow.com/questions/55980027/building-a-csv-based-on-user-input
+
+https://cs50.harvard.edu/python/2022/notes/6/
+
+PEP8 Documentation
+https://peps.python.org/pep-0008/
+
+Python Date String Testing
+https://stackoverflow.com/questions/18610884/python-date-string-testing
+
+Writing & Reading CSV file Python
+https://stackoverflow.com/questions/14978575/writing-reading-the-same-csv-file-in-python
+
+__Testing__
+
+Exceptions Documentation
+https://docs.python.org/3/library/exceptions.html#Exception
+
+Monkeypatch Documentation
+https://docs.pytest.org/en/7.1.x/_modules/_pytest/monkeypatch.html
+
+CSV Documentation
+https://docs.python.org/3/library/csv.html#reader-objects
+
+Pytest Documentation
+https://docs.pytest.org/en/7.3.x/
+
