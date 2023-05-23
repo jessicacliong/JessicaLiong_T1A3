@@ -3,6 +3,7 @@ import datetime as dt
 import random
 import pandas as pd
 from simple_term_menu import TerminalMenu
+from unique_exceptions import DateCharacterError, DateFormatError, YearLengthError, ShortYearError
 
 def main_greeting():
   print( "Welcome to Snooze It!")
@@ -11,13 +12,39 @@ main_greeting()
 
 def user_input():
   year = int(input("Please enter the year of the log (YYYY): "))
+  currentYear = dt.now().year
+
+  if year < 1 and year > 9999:
+    raise ValueError("Invalid year entry. Year input must be between 1 and 9999")
+  if year > currentYear:
+    raise ValueError("Invalid year entry. Year input must be before or within the current year")
+  if year == "#$%/^&*()!@[]}{\|.,?<>}": #not sure how to word this argument
+    raise DateCharacterError()
+  if len(year) != 4:
+    raise YearLengthError()
+  if len(year) > 4:
+    raise ShortYearError()
+
   month = int(input("Please enter the month of the log (MM): "))
-  date = int(input("Please enter the date of the log (DD): "))
-  date = dt.date(year, month, date)
-  hours_of_sleep = int(input("How many hours did you sleep? "))
-  quality_of_sleep = int(input("On a scale of 1 (Poor) to 10 (Excellent), how would you rate your sleep? "))
-  caffeine = input("Did you have any coffee in the afternoon/evening? Enter: (Y/N) ")
-  journal = input("Would you like to enter a sleep journal? Enter: (Y/N) ")
+  currentMonth = dt.now().month
+
+  if month < 1 and month > 12:
+    raise ValueError("Invalid month entry. Month must be between 1 and 12.")
+  if month > currentMonth and year > currentYear:
+    raise ValueError("Month of entry is above current month. Please enter a valid month input.")
+  if month == "#$%/^&*()!@[]}{\|.,?<>}":
+    raise DateCharacterError()
+  if len(month) != 2:
+    raise  
+
+  day = int(input("Please enter the date of the log (DD): "))
+  currentDate = dt.now().day
+
+  date = dt.date(year, month, day)
+  hours_of_sleep = int(input("How many hours did you sleep? (Press <Enter> to continue) : "))
+  quality_of_sleep = int(input("On a scale of 1 (Poor) to 10 (Excellent), how would you rate your sleep? (Press <Enter> to continue) : "))
+  caffeine = input("Did you have any coffee in the afternoon/evening? (Enter (Y/N) & press <Enter> to continue) : ")
+  journal = input("Would you like to enter a sleep journal? (Enter (Y/N) & press <Enter> to continue) : ")
   if journal == 'N':
     journal_entry = ('')
     print("Thank you for using Snooze It. Your data has been saved! ")
@@ -76,19 +103,21 @@ def main_menu():
     return search_choice
 
 while True:
-  search_choice = main_menu()
-  if search_choice == "Enter A New Sleep Log":
-    print("You have chosen to enter a new sleep log")
-    date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry = user_input()
-    write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry)
-    sleep_tip()
-  elif search_choice == "View Previous Single Night Sleep Log":
-    print("You have chosen to view a previous sleep log")
-    log_period = log_search_day()
-  elif search_choice == "View Previous 1 Week Sleep Log":
-    print("You have chosen to search for a 1 week sleep log")
-    log_period = log_search_week()
-  elif search_choice == 'End Application':
-    print("You have chosen to End Application")
-    log_period = end_application()
-    break
+  try:
+    search_choice = main_menu()
+    if search_choice == "Enter A New Sleep Log":
+      print("You have chosen to enter a new sleep log")
+      date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry = user_input()
+      write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry)
+      sleep_tip()
+    elif search_choice == "View Previous Single Night Sleep Log":
+      print("You have chosen to view a previous sleep log")
+      log_period = log_search_day()
+    elif search_choice == "View Previous 1 Week Sleep Log":
+      print("You have chosen to search for a 1 week sleep log")
+      log_period = log_search_week()
+    elif search_choice == 'End Application':
+      print("You have chosen to End Application")
+      log_period = end_application()
+      break
+  except 
