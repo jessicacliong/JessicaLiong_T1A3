@@ -6,7 +6,7 @@ from simple_term_menu import TerminalMenu
 
 def main_greeting():
   print( "Welcome to Snooze It!")
-
+  
 main_greeting()
 
 def user_input():
