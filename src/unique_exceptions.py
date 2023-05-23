@@ -1,4 +1,4 @@
-class DateCharacterError(Exception):
+class CharacterError(Exception):
   """An error raised when a foreign character or symbol is entered in a date entry.
   """
   def __init__(self):
@@ -45,7 +45,7 @@ class ShortDateError(Exception):
       "The length of date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
     )
 
-class DateLengthError(Exception):
+class MonthLengthError(Exception):
   """An error raised when the date format is not according to required length.
   """
   def __init__(self):
@@ -53,7 +53,7 @@ class DateLengthError(Exception):
       "The format of the date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
     )
 
-class ShortDateError(Exception):
+class ShortMonthError(Exception):
   """An error raised when the date format falls short of the required length.
   """
   def __init__(self):

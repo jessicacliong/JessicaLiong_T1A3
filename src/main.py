@@ -3,7 +3,8 @@ import datetime as dt
 import random
 import pandas as pd
 from simple_term_menu import TerminalMenu
-from unique_exceptions import DateCharacterError, DateFormatError, YearLengthError, ShortYearError
+from unique_exceptions import CharacterError, YearLengthError, ShortYearError, MonthLengthError, ShortMonthError
+from unique_exceptions import DateLengthError, ShortDateError, 
 
 def main_greeting():
   print( "Welcome to Snooze It!")
@@ -15,33 +16,50 @@ def user_input():
   currentYear = dt.now().year
 
   if year < 1 and year > 9999:
-    raise ValueError("Invalid year entry. Year input must be between 1 and 9999")
+    raise ValueError("Invalid year entry. Year entry must be between 1 and 9999")
   if year > currentYear:
-    raise ValueError("Invalid year entry. Year input must be before or within the current year")
+    raise ValueError("Invalid year entry. Year entry must be before or within the current year")
   if year == "#$%/^&*()!@[]}{\|.,?<>}": #not sure how to word this argument
-    raise DateCharacterError()
-  if len(year) != 4:
-    raise YearLengthError()
+    raise CharacterError()
   if len(year) > 4:
+    raise YearLengthError()
+  if len(year) < 4:
     raise ShortYearError()
 
   month = int(input("Please enter the month of the log (MM): "))
   currentMonth = dt.now().month
 
   if month < 1 and month > 12:
-    raise ValueError("Invalid month entry. Month must be between 1 and 12.")
+    raise ValueError("Invalid month entry. Month entry must be between 1 and 12.")
   if month > currentMonth and year > currentYear:
     raise ValueError("Month of entry is above current month. Please enter a valid month input.")
   if month == "#$%/^&*()!@[]}{\|.,?<>}":
-    raise DateCharacterError()
-  if len(month) != 2:
-    raise  
+    raise CharacterError()
+  if len(month) > 2:
+    raise MonthLengthError()
+  if len(month) < 2:
+    raise ShortMonthError()
 
   day = int(input("Please enter the date of the log (DD): "))
   currentDate = dt.now().day
 
+  if day < 1 and day > 31:
+    raise ValueError("Invalid date entry. Date entry must be between 1 and 31")\
+  # if day < currentDate and month > currentMonth and year > currentYear: 
+  #   raise ValueError("Day of entry is above current month. Please enter a valid day input.")
+  if day == "#$%/^&*()!@[]}{\|.,?<>}":
+    raise CharacterError()
+  if len(day) > 2:
+    raise DateLengthError()
+  if len(day) < 2:
+    raise ShortDateError()
+
   date = dt.date(year, month, day)
+
   hours_of_sleep = int(input("How many hours did you sleep? (Press <Enter> to continue) : "))
+  
+
+  
   quality_of_sleep = int(input("On a scale of 1 (Poor) to 10 (Excellent), how would you rate your sleep? (Press <Enter> to continue) : "))
   caffeine = input("Did you have any coffee in the afternoon/evening? (Enter (Y/N) & press <Enter> to continue) : ")
   journal = input("Would you like to enter a sleep journal? (Enter (Y/N) & press <Enter> to continue) : ")
