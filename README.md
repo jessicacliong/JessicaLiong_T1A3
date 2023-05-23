@@ -1,4 +1,4 @@
-# SnoozeIt
+# Snooze It
 
 GitHub Respository: https://github.com/jessicacliong/JessicaLiong_T1A3
 
@@ -120,7 +120,7 @@ __Python Coding__
 
 https://automatetheboringstuff.com/2e/chapter16/
 
-
+Inserting Input into CSV
 https://stackoverflow.com/questions/55980027/building-a-csv-based-on-user-input
 
 https://cs50.harvard.edu/python/2022/notes/6/
@@ -140,6 +140,9 @@ https://stackoverflow.com/questions/64817406/fetching-particular-rows-of-a-csv-f
 DateTime in Pandas: An Uncomplicated Guide (2023)
 https://www.dataquest.io/blog/datetime-in-pandas/#:~:text=Now%2C%20the%20data%20type%20of,precision%20of%20the%20DateTime%20object.
 
+Searching Records between 2 dates in CSV File
+https://stackoverflow.com/questions/62058695/searching-for-records-between-two-dates-and-two-times-in-csv-file-using-python-p
+
 __Testing__
 
 Exceptions Documentation
@@ -155,7 +158,7 @@ Pytest Documentation
 https://docs.pytest.org/en/7.3.x/
 
 
-# Further Development of Application
+## Further Development of Application
 
 If time permitted, the application could have a login feature where each user could have individual access to their own sleep information in separate accounts, allowing for separation of sleep logs to tailor an individual's search function and enhance the privacy of an individual's sleep journals and logs. 
 
