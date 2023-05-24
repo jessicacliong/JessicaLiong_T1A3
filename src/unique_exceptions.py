@@ -103,7 +103,3 @@ class InvalidInputError(Exception):
     )
 
 
-  # if hours_of_sleep < 0:
-  #   raise NegativeError("Negative Number Error")
-  # if type(hours_of_sleep) is not int:
-  #   raise ValueError()

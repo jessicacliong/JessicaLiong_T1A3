@@ -42,6 +42,12 @@ def user_input():
   date = dt.date(year, month, day)
 
   hours_of_sleep = int(input("How many hours did you sleep? (Press <Enter> to continue): "))
+  
+  if hours_of_sleep < 0:
+    raise NegativeError("Negative Number Error")
+  if type(hours_of_sleep) is not int:
+    raise ValueError()
+
   quality_of_sleep = int(input("On a scale of 1 (Poor) to 10 (Excellent), how would you rate your sleep? (Press <Enter> to continue): "))
   caffeine = input("Did you have any coffee in the afternoon/evening? (Enter (Y/N) & press <Enter> to continue): ")
   journal = input("Would you like to enter a sleep journal? (Enter (Y/N) & press <Enter> to continue): ")
