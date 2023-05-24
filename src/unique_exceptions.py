@@ -1,9 +1,17 @@
-class CharacterError(Exception):
-  """An error raised when a foreign character or symbol is entered in a date entry.
+# class CharacterError(Exception):
+#   """An error raised when a foreign character or symbol is entered in a date entry.
+#   """
+#   def __init__(self):
+#     super().__init__(
+#       "There is an invalid character(s) in the entry. Please enter numbers only."
+#     )
+
+class NegativeError(Exception):
+  """An error raised when a negative number is given as an input.
   """
   def __init__(self):
     super().__init__(
-      "There is an invalid character in the entry. Please enter numbers only."
+      "Please do not enter a negative number."
     )
 
 class DateFormatError(Exception):
@@ -14,52 +22,69 @@ class DateFormatError(Exception):
       "There is a foreign symbol(s) in the input. Please enter '-' as date separators"
     )
 
-class YearLengthError(Exception):
-  """An error raised when the length of characters in a date entry exceeds above the required length."""
-  def __init__(self):
-    super().__init__(
-      "The length of year characters exceeds the required length. Please enter a date entry according to format YYYY-MM-DD."
-    )
-                     
-class ShortYearError(Exception):
-  """An error raised when the length of characters in a date entry falls below the required length.
+class InvalidYearError(Exception):
+  """An error raised when date entry exceeds current year range. 
   """
   def __init__(self):
     super().__init__(
-      "The length of uear characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
+      "An invalid entry has been made. Please enter a number within 2023 and the current year"
     )
 
-class DateLengthError(Exception):
-  """An error raised when the date format is not according to required length.
+# class YearLengthError(Exception):
+#   """An error raised when the length of characters in a date entry exceeds above the required length."""
+#   def __init__(self):
+#     super().__init__(
+#       "The year input is not within the required length. Please enter according to format (YYYY)"
+#     )
+
+# class MonthLengthError(Exception):
+#   """An error raised when the date format is not according to required length.
+#   """
+#   def __init__(self):
+#     super().__init__(
+#       "The month input is not within the required length. Please enter according to format (MM)"
+#     )
+
+class InvalidMonthError(Exception):
+  """An error raised when date entry exceeds current month range. 
   """
   def __init__(self):
     super().__init__(
-      "The format of the date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
+      "Month entry must not exceed the current month of year. Please enter a valid month."
     )
 
-class ShortDateError(Exception):
-  """An error raised when the date format falls short of the required length.
+class InvalidDateError(Exception):
+  """An error raised when date entry exceeds current month range. 
   """
   def __init__(self):
     super().__init__(
-      "The length of date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
+      "Date entry must not exceed the current date of the calendar year. Please enter a valid date."
     )
 
-class MonthLengthError(Exception):
-  """An error raised when the date format is not according to required length.
+class RangeError(Exception):
+  """An error raised when month range exceeds calendar format.
   """
   def __init__(self):
     super().__init__(
-      "The format of the date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
+      "Entries must be within normal calendar format"
     )
 
-class ShortMonthError(Exception):
-  """An error raised when the date format falls short of the required length.
-  """
-  def __init__(self):
-    super().__init__(
-      "The length of date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
-    )    
+
+# class DateLengthError(Exception):
+#   """An error raised when the date format is not according to required length.
+#   """
+#   def __init__(self):
+#     super().__init__(
+#       "The format of the date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
+#     )
+
+# class ShortDateError(Exception):
+#   """An error raised when the date format falls short of the required length.
+#   """
+#   def __init__(self):
+#     super().__init__(
+#       "The length of date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
+#     )
 
 class NumberInputError(Exception):
   """An error raised when foreign symbol(s) and alphabet character(s) is detected in an integer input prompt.
@@ -74,5 +99,11 @@ class InvalidInputError(Exception):
   """
   def __init__(self):
     super().__init__(
-      "You have entered an invalide character. Please type either 'Y' or 'N'."
+      "You have entered an invalid character. Please type either 'Y' or 'N'."
     )
+
+
+  # if hours_of_sleep < 0:
+  #   raise NegativeError("Negative Number Error")
+  # if type(hours_of_sleep) is not int:
+  #   raise ValueError()

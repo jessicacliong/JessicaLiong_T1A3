@@ -3,66 +3,48 @@ import datetime as dt
 import random
 import pandas as pd
 from simple_term_menu import TerminalMenu
-from unique_exceptions import CharacterError, YearLengthError, ShortYearError, MonthLengthError, ShortMonthError
-from unique_exceptions import DateLengthError, ShortDateError, 
+from unique_exceptions import InvalidYearError, InvalidMonthError, InvalidDateError, RangeError
+from unique_exceptions import NegativeError
 
 def main_greeting():
-  print( "Welcome to Snooze It!")
-  
+  print("Welcome to Snooze It!")
 main_greeting()
 
 def user_input():
   year = int(input("Please enter the year of the log (YYYY): "))
-  currentYear = dt.now().year
+  currentYear = dt.datetime.now().year
 
-  if year < 1 and year > 9999:
-    raise ValueError("Invalid year entry. Year entry must be between 1 and 9999")
-  if year > currentYear:
-    raise ValueError("Invalid year entry. Year entry must be before or within the current year")
-  if year == "#$%/^&*()!@[]}{\|.,?<>}": #not sure how to word this argument
-    raise CharacterError()
-  if len(year) > 4:
-    raise YearLengthError()
-  if len(year) < 4:
-    raise ShortYearError()
+  if type(year) is not int:
+    raise ValueError()
+  if year > currentYear or year < 2023 or year > 9999:
+    raise InvalidYearError()
 
   month = int(input("Please enter the month of the log (MM): "))
-  currentMonth = dt.now().month
+  currentMonth = dt.datetime.now().month
 
-  if month < 1 and month > 12:
-    raise ValueError("Invalid month entry. Month entry must be between 1 and 12.")
-  if month > currentMonth and year > currentYear:
-    raise ValueError("Month of entry is above current month. Please enter a valid month input.")
-  if month == "#$%/^&*()!@[]}{\|.,?<>}":
-    raise CharacterError()
-  if len(month) > 2:
-    raise MonthLengthError()
-  if len(month) < 2:
-    raise ShortMonthError()
+  if type(month) is not int:
+    raise ValueError()
+  if month > currentMonth or year > currentYear:
+    raise InvalidMonthError()
+  if month < 1:
+    raise RangeError()
 
   day = int(input("Please enter the date of the log (DD): "))
-  currentDate = dt.now().day
+  currentDate = dt.datetime.now().day
 
-  if day < 1 and day > 31:
-    raise ValueError("Invalid date entry. Date entry must be between 1 and 31")\
-  # if day < currentDate and month > currentMonth and year > currentYear: 
-  #   raise ValueError("Day of entry is above current month. Please enter a valid day input.")
-  if day == "#$%/^&*()!@[]}{\|.,?<>}":
-    raise CharacterError()
-  if len(day) > 2:
-    raise DateLengthError()
-  if len(day) < 2:
-    raise ShortDateError()
+  if type(day) is not int:
+    raise ValueError()
+  if day > currentDate or month > currentMonth or year > currentYear: 
+    raise InvalidDateError()
+  if day < 1:
+    raise RangeError()
 
   date = dt.date(year, month, day)
 
-  hours_of_sleep = int(input("How many hours did you sleep? (Press <Enter> to continue) : "))
-  
-
-  
-  quality_of_sleep = int(input("On a scale of 1 (Poor) to 10 (Excellent), how would you rate your sleep? (Press <Enter> to continue) : "))
-  caffeine = input("Did you have any coffee in the afternoon/evening? (Enter (Y/N) & press <Enter> to continue) : ")
-  journal = input("Would you like to enter a sleep journal? (Enter (Y/N) & press <Enter> to continue) : ")
+  hours_of_sleep = int(input("How many hours did you sleep? (Press <Enter> to continue): "))
+  quality_of_sleep = int(input("On a scale of 1 (Poor) to 10 (Excellent), how would you rate your sleep? (Press <Enter> to continue): "))
+  caffeine = input("Did you have any coffee in the afternoon/evening? (Enter (Y/N) & press <Enter> to continue): ")
+  journal = input("Would you like to enter a sleep journal? (Enter (Y/N) & press <Enter> to continue): ")
   if journal == 'N':
     journal_entry = ('')
     print("Thank you for using Snooze It. Your data has been saved! ")
@@ -121,13 +103,41 @@ def main_menu():
     return search_choice
 
 while True:
-  try:
     search_choice = main_menu()
     if search_choice == "Enter A New Sleep Log":
       print("You have chosen to enter a new sleep log")
-      date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry = user_input()
-      write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry)
-      sleep_tip()
+      try:
+        date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry = user_input()
+        write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry)
+      except ValueError as e:
+        print(type(e))
+        if('invalid literal for int()' in str(e)):
+          print("An invalid character(s) has been entered. Please enter numbers only")
+        if('day is out of range for month' in str(e)):
+          print("Day is out of range for month. Please enter correct dates for the month")
+      except InvalidYearError as e:
+        print(type(e))
+        print(e)
+      except RangeError as e:
+        print(type(e))
+        print(e)
+      # except MonthLengthError as e:
+      #   print(type(e))
+      #   print(e)
+      # except CharacterError as e:
+      #   print(type(e))
+      #   print(e)
+      except NegativeError as e:
+        print(type(e))
+        print(e)
+      except InvalidMonthError as e:
+        print(type(e))
+        print(e)
+      except InvalidDateError as e:
+        print(type(e))
+        print(e)
+      else:
+        sleep_tip()
     elif search_choice == "View Previous Single Night Sleep Log":
       print("You have chosen to view a previous sleep log")
       log_period = log_search_day()
@@ -138,4 +148,3 @@ while True:
       print("You have chosen to End Application")
       log_period = end_application()
       break
-  except 
