@@ -1,11 +1,3 @@
-# class CharacterError(Exception):
-#   """An error raised when a foreign character or symbol is entered in a date entry.
-#   """
-#   def __init__(self):
-#     super().__init__(
-#       "There is an invalid character(s) in the entry. Please enter numbers only."
-#     )
-
 class NegativeError(Exception):
   """An error raised when a negative number is given as an input.
   """
@@ -29,21 +21,6 @@ class InvalidYearError(Exception):
     super().__init__(
       "An invalid entry has been made. Please enter a number within 2023 and the current year"
     )
-
-# class YearLengthError(Exception):
-#   """An error raised when the length of characters in a date entry exceeds above the required length."""
-#   def __init__(self):
-#     super().__init__(
-#       "The year input is not within the required length. Please enter according to format (YYYY)"
-#     )
-
-# class MonthLengthError(Exception):
-#   """An error raised when the date format is not according to required length.
-#   """
-#   def __init__(self):
-#     super().__init__(
-#       "The month input is not within the required length. Please enter according to format (MM)"
-#     )
 
 class InvalidMonthError(Exception):
   """An error raised when date entry exceeds current month range. 
@@ -69,23 +46,6 @@ class RangeError(Exception):
       "Entries must be within normal calendar format"
     )
 
-
-# class DateLengthError(Exception):
-#   """An error raised when the date format is not according to required length.
-#   """
-#   def __init__(self):
-#     super().__init__(
-#       "The format of the date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
-#     )
-
-# class ShortDateError(Exception):
-#   """An error raised when the date format falls short of the required length.
-#   """
-#   def __init__(self):
-#     super().__init__(
-#       "The length of date characters falls below the required length. Please enter a date entry according to format YYYY-MM-DD."
-#     )
-
 class NumberInputError(Exception):
   """An error raised when foreign symbol(s) and alphabet character(s) is detected in an integer input prompt.
   """
@@ -102,4 +62,16 @@ class InvalidInputError(Exception):
       "You have entered an invalid character. Please type either 'Y' or 'N'."
     )
 
+class SleepTimeError(Exception):
+  """An error raised when duration of sleep exceeds hours in a day."""
+  def __init__(self):
+    super().__init__(
+      "Are you a rare species of a bear? Please enter a sensible number of hours slept."
+    )
 
+class UnavailableInputError(Exception):
+  """An error raised when search date could not be found in the file"""
+  def __init__(self):
+    super().__init__(
+      "This date entry doesn't exist in the system. Please enter another search date."
+    )
