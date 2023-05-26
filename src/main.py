@@ -5,90 +5,95 @@ import random
 import pandas as pd
 from simple_term_menu import TerminalMenu
 from unique_exceptions import InvalidYearError, InvalidMonthError, InvalidDateError, RangeError
-from unique_exceptions import NegativeError, NumberInputError, SleepTimeError, InvalidInputError, EmptyDataError
+from unique_exceptions import NegativeError, NumberInputError, SleepTimeError, InvalidInputError, EmptyDataError, DateExistsError
 
 def main_greeting():
   print("Welcome to Snooze It!")
 main_greeting()
 
-# def user_input():
-#   year = int(input("Please enter the year of the log (YYYY): "))
-#   currentYear = dt.datetime.now().year
+def user_input():
+  year = int(input("Please enter the year of the log (YYYY): "))
+  currentYear = dt.datetime.now().year
 
-#   if type(year) is not int:
-#     raise ValueError()
-#   if year > currentYear or year < 2023 or year > 9999:
-#     raise InvalidYearError()
+  if type(year) is not int:
+    raise ValueError()
+  if year > currentYear or year < 2023 or year > 9999:
+    raise InvalidYearError()
 
-#   month = int(input("Please enter the month of the log (MM): "))
-#   currentMonth = dt.datetime.now().month
+  month = int(input("Please enter the month of the log (MM): "))
+  currentMonth = dt.datetime.now().month
 
-#   if type(month) is not int:
-#     raise ValueError()
-#   if month > currentMonth or year > currentYear:
-#     raise InvalidMonthError()
-#   if month < 1:
-#     raise RangeError()
+  if type(month) is not int:
+    raise ValueError()
+  if month > currentMonth or year > currentYear:
+    raise InvalidMonthError()
+  if month < 1:
+    raise RangeError()
 
-#   day = int(input("Please enter the date of the log (DD): "))
-#   currentDate = dt.datetime.now().day
+  day = int(input("Please enter the date of the log (DD): "))
+  currentDate = dt.datetime.now().day
 
-#   if type(day) is not int:
-#     raise ValueError()
-#   if day > currentDate or month > currentMonth or year > currentYear:
-#     raise InvalidDateError()
-#   if day < 1:
-#     raise RangeError()
+  if type(day) is not int:
+    raise ValueError()
+  if day > currentDate or month > currentMonth or year > currentYear:
+    raise InvalidDateError()
+  if day < 1:
+    raise RangeError()
 
-#   date = dt.date(year, month, day)
+  date = dt.date(year, month, day)
+  print(date)
+    
+  # with open("user_information.csv", "r") as f:
+  #   file_reader = csv.DictReader(f, delimiter=';')
+  #   if file_reader.logdate == date:
+  #     raise DateExistsError()
 
-#   hours_of_sleep = int(input("How many hours did you sleep? (Press <Enter> to continue): "))
+  hours_of_sleep = float(input("How many hours did you sleep? (Press <Enter> to continue): "))
 
-#   if hours_of_sleep < 0:
-#     raise NegativeError()
-#   if type(hours_of_sleep) is not int:
-#     raise ValueError()
-#   if hours_of_sleep > 24:
-#     raise SleepTimeError()
+  if hours_of_sleep < 0:
+    raise NegativeError()
+  if type(hours_of_sleep) is not float:
+    raise ValueError()
+  if hours_of_sleep > 24:
+    raise SleepTimeError()
 
-#   quality_of_sleep = int(input("On a scale of 0 (No Sleep) to 10 (Excellent), how would you rate your sleep? \n(Press <Enter> to continue):\n "))
+  quality_of_sleep = int(input("On a scale of 0 (No Sleep) to 10 (Excellent), how would you rate your sleep? \n(Press <Enter> to continue):\n "))
 
-#   if quality_of_sleep > 10:
-#     raise NumberInputError()
-#   if quality_of_sleep < 0:
-#     raise NegativeError()
-#   if type(quality_of_sleep) is not int:
-#     raise ValueError()
+  if quality_of_sleep > 10:
+    raise NumberInputError()
+  if quality_of_sleep < 0:
+    raise NegativeError()
+  if type(quality_of_sleep) is not int:
+    raise ValueError()
+  
+  caffeine = input("Did you have any coffee in the afternoon/evening? \n(Enter (Y/N) & press <Enter> to continue):\n ")
+  if caffeine.upper() != "Y" and caffeine.upper() != "N":
+    raise InvalidInputError()
+  
+  journal = input("Would you like to enter a sleep journal? \n(Enter (Y/N) & press <Enter> to continue):\n ")
 
-#   caffeine = input("Did you have any coffee in the afternoon/evening? \n(Enter (Y/N) & press <Enter> to continue):\n ")
+  if caffeine.upper() != "Y" and caffeine.upper() != "N":
+      raise InvalidInputError()
 
-#   if caffeine.upper() != "Y" and caffeine.upper() != "N":
-#     raise InvalidInputError()
+  if journal == 'N':
+    journal_entry = ('')
+    print("Thank you for using Snooze It. Your data has been saved! ")
+  elif journal == 'Y':
+    journal_entry = input('Please write your entry \n(Press <Enter> to Continue):\n ')
+  return date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry
 
-#   journal = input("Would you like to enter a sleep journal? \n(Enter (Y/N) & press <Enter> to continue):\n ")
+def write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry):
+  with open('user_information.csv', 'a', newline='') as file:
+    headers = ['Log Date', 'Hours of Sleep', 'Quality of Sleep (1-10)', 'Caffeine Intake', 'Write Journal', 'Journal Entry']
+    outputDictWriter = csv.DictWriter(file, headers)
+    outputDictWriter.writerow({'Log Date': date, 'Hours of Sleep': hours_of_sleep, 'Quality of Sleep (1-10)': quality_of_sleep, 'Caffeine Intake': caffeine, 'Write Journal': journal, 'Journal Entry': journal_entry})
+    print("Thank you for using Snooze It. Your data has been saved! ")
 
-#   if caffeine.upper() != "Y" and caffeine.upper() != "N":
-#       raise InvalidInputError()
-
-#   if journal == 'N':
-#     journal_entry = ('')
-#     print("Thank you for using Snooze It. Your data has been saved! ")
-#   elif journal == 'Y':
-#     journal_entry = input('Please write your entry \n(Press <Enter> to Continue):\n ')
-#     print("Thank you for using Snooze It. Your data has been saved! ")
-#   return date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry
-
-# def write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry):
-#   with open('user_information.csv', 'a', newline='') as file:
-#     headers = ['Log Date', 'Hours of Sleep', 'Quality of Sleep (1-10)', 'Caffeine Intake', 'Write Journal', 'Journal Entry']
-#     outputDictWriter = csv.DictWriter(file, headers)
-#     outputDictWriter.writerow({'Log Date': date, 'Hours of Sleep': hours_of_sleep, 'Quality of Sleep (1-10)': quality_of_sleep, 'Caffeine Intake': caffeine, 'Write Journal': journal, 'Journal Entry': journal_entry})
-
-# def sleep_tip():
-#   with open("sleep_tips.csv", "r") as f:
-#     csv_reader = csv.reader(f)
-#     sleep_tips = list(csv_reader)[1:]
-#     print(f'\nSleep Tip: {random.choice(sleep_tips)}\n')
+def sleep_tip():
+  with open("sleep_tips.csv", "r") as f:
+    csv_reader = csv.reader(f)
+    sleep_tips = list(csv_reader)[1:]
+  print(f'\nSleep Tip: {random.choice(sleep_tips)}\n')
 
 def log_search_day():
     df = pd.read_csv("user_information.csv")
@@ -98,6 +103,7 @@ def log_search_day():
     current_date = dt.datetime.now()
     if search_date > current_date:
       raise InvalidDateError()
+    print(f'We have found a log for the {search_date}:')
     filtered_df = df[df['Log Date'] == search_date]
     if filtered_df.empty == True:
       raise EmptyDataError()
@@ -112,7 +118,7 @@ def log_search_week():
   if start_date > dt.datetime.now():
     raise InvalidDateError()
   end_date = start_date - timedelta(days=7)
-  print(f'This search outputs sleep logs ranging from {start_date} to {end_date}.')
+  print(f'We have found the following sleep logs ranging from {start_date} to {end_date}:')
   mask = (df['Log Date'] >= end_date) & (df['Log Date'] <= start_date) # greater than the start date and smaller than the end date
   df2 = df.loc[mask]
   if df2.empty == True:
@@ -146,12 +152,12 @@ while True:
       try:
         date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry = user_input()
         write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry)
-      except ValueError as e:
-        print(type(e))
-        if('invalid literal for int()' in str(e)):
-          print("An invalid character(s) has been entered. Please enter numbers only")
-        if('day is out of range for month' in str(e)):
-          print("Day is out of range for month. Please enter correct dates for the month")
+      # except ValueError as e:
+      #   print(type(e))
+      #   if('invalid literal for int()' in str(e)):
+      #     print("An invalid character(s) has been entered. Please enter numbers only")
+      #   if('day is out of range for month' in str(e)):
+      #     print("Day is out of range for month. Please enter correct dates for the month")
       except InvalidYearError as e:
         print(type(e))
         print(e)
@@ -174,6 +180,9 @@ while True:
         print(type(e))
         print(e)
       except InvalidInputError as e:
+        print(type(e))
+        print(e)
+      except DateExistsError as e:
         print(type(e))
         print(e)
       else:
