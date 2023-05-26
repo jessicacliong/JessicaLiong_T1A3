@@ -97,7 +97,7 @@ __Feature 3 - Output Previous 7 Days Sleep Logs from Current Day (High Priority)
 2. PromptUser To Enter StartDate (DD-MM-YYYY).
 3. LimitSearchDate to 7ConsecutiveDates BeforeCurrentDate. 
 	 End_date = dt.datetime.now() - time.delta(day=7)
-4. PrintToUser (The StartDateSearch is {StartDate} and EndDateSearch is {EndDate}).
+4. PrintToUser(The StartDateSearch is {StartDate} and EndDateSearch is {EndDate}.)
 5. Filter LogDates <= StartDate & LogDates >= EndDate using DataFrames.Mask Functionality In ExistingUserInformation.Csv
 6. Locate / Read Rows With PandasDataFrame
 7. Print Output of SleepLogs Onto UserTerminal 
