@@ -1,120 +1,129 @@
 import csv
 import datetime as dt
+from datetime import timedelta
 import random
 import pandas as pd
 from simple_term_menu import TerminalMenu
-from unique_exceptions import InvalidYearError, InvalidMonthError, InvalidDateError, RangeError, DateFormatError
-from unique_exceptions import NegativeError, NumberInputError, SleepTimeError, InvalidInputError, UnavailableInputError
+from unique_exceptions import InvalidYearError, InvalidMonthError, InvalidDateError, RangeError
+from unique_exceptions import NegativeError, NumberInputError, SleepTimeError, InvalidInputError, EmptyDataError, DateInputError
 
 def main_greeting():
   print("Welcome to Snooze It!")
 main_greeting()
 
-def user_input():
-  year = int(input("Please enter the year of the log (YYYY): "))
-  currentYear = dt.datetime.now().year
+# def user_input():
+#   year = int(input("Please enter the year of the log (YYYY): "))
+#   currentYear = dt.datetime.now().year
 
-  if type(year) is not int:
-    raise ValueError()
-  if year > currentYear or year < 2023 or year > 9999:
-    raise InvalidYearError()
+#   if type(year) is not int:
+#     raise ValueError()
+#   if year > currentYear or year < 2023 or year > 9999:
+#     raise InvalidYearError()
 
-  month = int(input("Please enter the month of the log (MM): "))
-  currentMonth = dt.datetime.now().month
+#   month = int(input("Please enter the month of the log (MM): "))
+#   currentMonth = dt.datetime.now().month
 
-  if type(month) is not int:
-    raise ValueError()
-  if month > currentMonth or year > currentYear:
-    raise InvalidMonthError()
-  if month < 1:
-    raise RangeError()
+#   if type(month) is not int:
+#     raise ValueError()
+#   if month > currentMonth or year > currentYear:
+#     raise InvalidMonthError()
+#   if month < 1:
+#     raise RangeError()
 
-  day = int(input("Please enter the date of the log (DD): "))
-  currentDate = dt.datetime.now().day
+#   day = int(input("Please enter the date of the log (DD): "))
+#   currentDate = dt.datetime.now().day
 
-  if type(day) is not int:
-    raise ValueError()
-  if day > currentDate or month > currentMonth or year > currentYear: 
-    raise InvalidDateError()
-  if day < 1:
-    raise RangeError()
+#   if type(day) is not int:
+#     raise ValueError()
+#   if day > currentDate or month > currentMonth or year > currentYear:
+#     raise InvalidDateError()
+#   if day < 1:
+#     raise RangeError()
 
-  date = dt.date(year, month, day)
+#   date = dt.date(year, month, day)
 
-  hours_of_sleep = int(input("How many hours did you sleep? (Press <Enter> to continue): "))
-  
-  if hours_of_sleep < 0:
-    raise NegativeError()
-  if type(hours_of_sleep) is not int:
-    raise ValueError()
-  if hours_of_sleep > 24:
-    raise SleepTimeError()
+#   hours_of_sleep = int(input("How many hours did you sleep? (Press <Enter> to continue): "))
 
-  quality_of_sleep = int(input("On a scale of 0 (No Sleep) to 10 (Excellent), how would you rate your sleep? \n(Press <Enter> to continue):\n "))
-  
-  if quality_of_sleep > 10:
-    raise NumberInputError()
-  if quality_of_sleep < 0:
-    raise NegativeError()
-  if type(quality_of_sleep) is not int:
-    raise ValueError()
-  
-  caffeine = input("Did you have any coffee in the afternoon/evening? \n(Enter (Y/N) & press <Enter> to continue):\n ")
-  
-  if caffeine.upper() != "Y" and caffeine.upper() != "N":
-    raise InvalidInputError()
+#   if hours_of_sleep < 0:
+#     raise NegativeError()
+#   if type(hours_of_sleep) is not int:
+#     raise ValueError()
+#   if hours_of_sleep > 24:
+#     raise SleepTimeError()
 
-  journal = input("Would you like to enter a sleep journal? \n(Enter (Y/N) & press <Enter> to continue):\n ")
-  
-  if caffeine.upper() != "Y" and caffeine.upper() != "N":
-      raise InvalidInputError()
+#   quality_of_sleep = int(input("On a scale of 0 (No Sleep) to 10 (Excellent), how would you rate your sleep? \n(Press <Enter> to continue):\n "))
 
-  if journal == 'N':
-    journal_entry = ('')
-    print("Thank you for using Snooze It. Your data has been saved! ")
-  elif journal == 'Y':
-    journal_entry = input('Please write your entry \n(Press <Enter> to Continue):\n ')
-    print("Thank you for using Snooze It. Your data has been saved! ")
-  return date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry
+#   if quality_of_sleep > 10:
+#     raise NumberInputError()
+#   if quality_of_sleep < 0:
+#     raise NegativeError()
+#   if type(quality_of_sleep) is not int:
+#     raise ValueError()
 
-def write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry):
-  with open('user_information.csv', 'a', newline='') as file:
-    headers = ['Log Date', 'Hours of Sleep', 'Quality of Sleep (1-10)', 'Caffeine Intake', 'Write Journal', 'Journal Entry']
-    outputDictWriter = csv.DictWriter(file, headers)
-    outputDictWriter.writerow({'Log Date': date, 'Hours of Sleep': hours_of_sleep, 'Quality of Sleep (1-10)': quality_of_sleep, 'Caffeine Intake': caffeine, 'Write Journal': journal, 'Journal Entry': journal_entry})
+#   caffeine = input("Did you have any coffee in the afternoon/evening? \n(Enter (Y/N) & press <Enter> to continue):\n ")
 
-def sleep_tip():
-  with open("sleep_tips.csv", "r") as f:
-    csv_reader = csv.reader(f)
-    sleep_tips = list(csv_reader)[1:]
-    print(f'\nSleep Tip: {random.choice(sleep_tips)}\n')
+#   if caffeine.upper() != "Y" and caffeine.upper() != "N":
+#     raise InvalidInputError()
 
-def log_search_day():
-    df = pd.read_csv("user_information.csv") 
-    df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
-    date = input("Please enter the date of the log (YYYY-MM-DD), then press <Enter> : ")
-    search_date = dt.datetime.strptime(date, "%Y-%m-%d")
-    current_date = dt.datetime.now()
-    if search_date > current_date:
-      raise InvalidDateError()
-    filtered_df = df[df['Log Date'] == search_date]
-    print(filtered_df)
-    return filtered_df
+#   journal = input("Would you like to enter a sleep journal? \n(Enter (Y/N) & press <Enter> to continue):\n ")
 
-def log_search_week():
-  df = pd.read_csv("user_information.csv") 
-  df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
-  start_date_raw = input("Please enter the start date of the log (YYYY-MM-DD), then press <Enter> : ")
-  start_date = dt.datetime.strptime(start_date_raw, "%Y-%m-%d")
-  end_date_raw = input("Please enter the last date of the log (YYYY-MM-DD), then press <Enter> : ")
-  end_date = dt.datetime.strptime(end_date_raw, "%Y-%m-%d")
-  mask = (df['Log Date'] >= start_date) & (df['Log Date'] <= end_date) # greater than the start date and smaller than the end date
-  df2 = df.loc[mask]
-  print(df2)
-  return df2
+#   if caffeine.upper() != "Y" and caffeine.upper() != "N":
+#       raise InvalidInputError()
 
-def end_application():
-  print("Thank you for using Snooze It! Please come back again soon!")
+#   if journal == 'N':
+#     journal_entry = ('')
+#     print("Thank you for using Snooze It. Your data has been saved! ")
+#   elif journal == 'Y':
+#     journal_entry = input('Please write your entry \n(Press <Enter> to Continue):\n ')
+#     print("Thank you for using Snooze It. Your data has been saved! ")
+#   return date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry
+
+# def write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry):
+#   with open('user_information.csv', 'a', newline='') as file:
+#     headers = ['Log Date', 'Hours of Sleep', 'Quality of Sleep (1-10)', 'Caffeine Intake', 'Write Journal', 'Journal Entry']
+#     outputDictWriter = csv.DictWriter(file, headers)
+#     outputDictWriter.writerow({'Log Date': date, 'Hours of Sleep': hours_of_sleep, 'Quality of Sleep (1-10)': quality_of_sleep, 'Caffeine Intake': caffeine, 'Write Journal': journal, 'Journal Entry': journal_entry})
+
+# def sleep_tip():
+#   with open("sleep_tips.csv", "r") as f:
+#     csv_reader = csv.reader(f)
+#     sleep_tips = list(csv_reader)[1:]
+#     print(f'\nSleep Tip: {random.choice(sleep_tips)}\n')
+
+# def log_search_day():
+#     df = pd.read_csv("user_information.csv")
+#     df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
+#     date = input("Please enter the date of the log (YYYY-MM-DD), then press <Enter> : ")
+#     search_date = dt.datetime.strptime(date, "%Y-%m-%d")
+#     current_date = dt.datetime.now()
+#     if search_date > current_date:
+#       raise InvalidDateError()
+#     filtered_df = df[df['Log Date'] == search_date]
+#     if filtered_df.empty == True:
+#       raise EmptyDataError()
+#     print(filtered_df)
+#     return filtered_df
+
+# def log_search_week():
+#   df = pd.read_csv("user_information.csv")
+#   df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
+#   # if start_date < dt.datetime.now():
+#   #   raise DateInputError()
+#   start_date_raw = input("Please enter a date to backtrack from in (YYYY-MM-DD), then press <Enter> : ")
+#   start_date = dt.datetime.strptime(start_date_raw, '%Y-%m-%d')
+#   print(start_date)
+
+#   end_date = start_date - timedelta(days=7)
+#   print(end_date)
+#   # print("This search will range from {start_date} to {end_date}. Press <Enter> to continue")
+#   # end_date_raw =
+#   mask = (df['Log Date'] >= end_date) & (df['Log Date'] <= start_date) # greater than the start date and smaller than the end date
+#   df2 = df.loc[mask]
+#   print(df2)
+#   return df2
+
+# def end_application():
+#   print("Thank you for using Snooze It! Please come back again soon!")
 
 def main_menu():
   print("\nPlease Choose From the Following Options:\n"
@@ -173,18 +182,29 @@ while True:
         sleep_tip()
     elif search_choice == "View Previous Single Night Sleep Log":
       print("You have chosen to view a previous sleep log")
-      try: 
+      try:
         log_period = log_search_day()
       except ValueError as e:
         print(type(e))
         if("does not match format '%Y-%m-%d'" in str(e)):
-          print("Incorrect Date Format Entered. Please enter date format within the format (YYYY-MM-DD), using numbers only.")
+          print("Incorrect Date Format Entered. Please enter date format within the format (YYYY-MM-DD), using numbers separated by '-' only.")
       except InvalidDateError as e:
         print(type(e))
         print(e)
+      except EmptyDataError as e:
+        print(type(e))
+        print(e)
     elif search_choice == "View Previous 1 Week Sleep Log":
-      print("You have chosen to search for a 1 week sleep log")
-      log_period = log_search_week()
+      print("You have chosen to view a week period of sleep logs")
+      try:
+        log_period = log_search_week()
+      except DateInputError as e:
+        print(type(e))
+        print(e)
+      except ValueError as e:
+        print(type(e))
+        if("does not match format '%Y-%m-%d'" in str(e)):
+          print("Incorrect Date Format Entered. Please enter date format within the format (YYYY-MM-DD), using numbers separated by '-' only.")
     elif search_choice == 'End Application':
       print("You have chosen to End Application")
       log_period = end_application()

@@ -31,8 +31,8 @@ The application allows users to write down comments and factors during the day o
 ### 2. Sleep Report (1 Day)
 Gives user a report of their sleep time, quality, and other associated sleep information including a journal of a desired date. Users input a desired date and the information of their sleep conditions will be displayed on their terminal. 
 
-### 3. Sleep Report (1 week)
-Gives users a report of their sleep time, quality and other relevant sleep information over a period of 1 week period. The 1 week period can be specified through user inputs of the desired start date and end date. Available sleep logs saved in the system will be displayed to the user as a terminal output. 
+### 3. Sleep Report before current date (Up to 7 consecutive days)
+Gives users a report of their sleep time, quality and other relevant sleep information over a period of 1 week period before current date. The 1 week period can be specified through user inputs of the desired start date and end date. Available sleep logs saved in the system will be displayed to the user as a terminal output. 
 Note: The 1 week period specified will include the start date and the end date defined by the user, if a log for those dates exist in record.   
 
 ### 3. Suggest Tips on better Sleep
@@ -80,7 +80,7 @@ __Log Search Main Menu__
 5. If UserSelection = b, Run Feature3
 6. If UserSelection = c, TermimateApplication
 
-__Feature 2 - Ouput Previous Sleep Log Based on 1 Date (High Priority)__
+__Feature 2 - Ouput Previous Sleep Log (High Priority)__
 
 1. Import PandasModule
 2. Create ReadCSV object of User_Information using DataFrame Feature of Pandas Module. 
@@ -91,16 +91,16 @@ __Feature 2 - Ouput Previous Sleep Log Based on 1 Date (High Priority)__
 7. If NotMatchFound, Print NoInputError & Print EmptyLog
 8. Return to MainMenuLogSearchOptions
 
-__Feature 3 - Output 1 Week Previous Sleep Logs (High Priority)__
+__Feature 3 - Output Previous 7 Days Sleep Logs from Current Day(High Priority)__
 
 1. Create ReadCSV object of User_Information using DataFrame Feature of Pandas Module. 
 2. PromptUser To Enter StartDate (DD-MM-YYYY)
 3. PromptUser To Enter EndDate (DD-MM-YYYY)
 4. Check if StartDate to EndDate = 7 Days, if not, PromptUser with LogPeriodError & Repeat From Step 2 Until CorrectPeriod Obtained
 5. Filter StartDate <= LogDates In ExistingUserInformation.Csv <= EndDate with Pandas DataFrameFunctionality
-6. Locaate Rows Within PandasDataFrame
+6. Locate Rows Within PandasDataFrame
 7. Print Output of SleepLogs Onto UserTerminal 
-6. If NoMatchFound, Print EmptyWarningMessage & Print EmptyLog
+6. If NoMatchFound, Print EmptyDataFrameError & Print EmptyLog
 7. Return to MainMenuLogSearchOptions
 
 __Feature 4 - Ouput Sleep Tip (High Priority)__
@@ -123,9 +123,10 @@ https://automatetheboringstuff.com/2e/chapter16/
 Inserting Input into CSV
 https://stackoverflow.com/questions/55980027/building-a-csv-based-on-user-input
 
+File Handling Lecture - Harvard University
 https://cs50.harvard.edu/python/2022/notes/6/
 
-PEP8 Documentation
+PEP-8 Documentation
 https://peps.python.org/pep-0008/
 
 Python Date String Testing
@@ -148,14 +149,8 @@ __Testing__
 Exceptions Documentation
 https://docs.python.org/3/library/exceptions.html#Exception
 
-Monkeypatch Documentation
-https://docs.pytest.org/en/7.1.x/_modules/_pytest/monkeypatch.html
-
 CSV Documentation
 https://docs.python.org/3/library/csv.html#reader-objects
-
-Pytest Documentation
-https://docs.pytest.org/en/7.3.x/
 
 
 ## Further Development of Application

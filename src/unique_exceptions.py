@@ -6,13 +6,13 @@ class NegativeError(Exception):
       "Please do not enter a negative number."
     )
 
-class DateFormatError(Exception):
-  """An error raised when date entry is not separated by a "-" symbol.
-  """
-  def __init__(self):
-    super().__init__(
-      "There is a foreign symbol(s) in the input. Please enter '-' as date separators"
-    )
+# class DateFormatError(Exception):
+#   """An error raised when date entry is not separated by a "-" symbol.
+#   """
+#   def __init__(self):
+#     super().__init__(
+#       "There is a foreign symbol(s) in the input. Please enter '-' as date separators and numbers only"
+#     )
 
 class InvalidYearError(Exception):
   """An error raised when date entry exceeds current year range. 
@@ -35,7 +35,7 @@ class InvalidDateError(Exception):
   """
   def __init__(self):
     super().__init__(
-      "Date entry must not exceed the current date of the calendar year. Please enter a valid date."
+      "Date entry must not exceed the current date of the calendar year. Please re-enter a valid date."
     )
 
 class RangeError(Exception):
@@ -69,9 +69,17 @@ class SleepTimeError(Exception):
       "Are you a rare species of a bear? Please enter a sensible number of hours slept."
     )
 
-class UnavailableInputError(Exception):
-  """An error raised when search date could not be found in the file"""
+class DateInputError(Exception):
+  """An error raised when date input is incorrect."""
   def __init__(self):
     super().__init__(
-      "This date entry doesn't exist in the system. Please enter another search date."
+      "Please enter the current date."
     )
+
+class EmptyDataError(Exception):
+  """An error raised when pandas dataframe returns empty."""
+  def __init__(self):
+      super().__init__(
+        "DataFrame search returned empty. Please enter a search date that is available in our records."
+      )
+
