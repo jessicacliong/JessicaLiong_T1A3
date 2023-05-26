@@ -69,12 +69,12 @@ class SleepTimeError(Exception):
       "Are you a rare species of a bear? Please enter a sensible number of hours slept."
     )
 
-class DateInputError(Exception):
-  """An error raised when date input is incorrect."""
-  def __init__(self):
-    super().__init__(
-      "Please enter the current date."
-    )
+# class DateInputError(Exception):
+#   """An error raised when date input is incorrect."""
+#   def __init__(self):
+#     super().__init__(
+#       "This date is beyond the current date. Please enter a valid date"
+#     )
 
 class EmptyDataError(Exception):
   """An error raised when pandas dataframe returns empty."""
@@ -82,4 +82,3 @@ class EmptyDataError(Exception):
       super().__init__(
         "DataFrame search returned empty. Please enter a search date that is available in our records."
       )
-

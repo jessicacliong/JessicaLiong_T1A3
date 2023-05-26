@@ -5,7 +5,7 @@ import random
 import pandas as pd
 from simple_term_menu import TerminalMenu
 from unique_exceptions import InvalidYearError, InvalidMonthError, InvalidDateError, RangeError
-from unique_exceptions import NegativeError, NumberInputError, SleepTimeError, InvalidInputError, EmptyDataError, DateInputError
+from unique_exceptions import NegativeError, NumberInputError, SleepTimeError, InvalidInputError, EmptyDataError
 
 def main_greeting():
   print("Welcome to Snooze It!")
@@ -90,40 +90,38 @@ main_greeting()
 #     sleep_tips = list(csv_reader)[1:]
 #     print(f'\nSleep Tip: {random.choice(sleep_tips)}\n')
 
-# def log_search_day():
-#     df = pd.read_csv("user_information.csv")
-#     df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
-#     date = input("Please enter the date of the log (YYYY-MM-DD), then press <Enter> : ")
-#     search_date = dt.datetime.strptime(date, "%Y-%m-%d")
-#     current_date = dt.datetime.now()
-#     if search_date > current_date:
-#       raise InvalidDateError()
-#     filtered_df = df[df['Log Date'] == search_date]
-#     if filtered_df.empty == True:
-#       raise EmptyDataError()
-#     print(filtered_df)
-#     return filtered_df
+def log_search_day():
+    df = pd.read_csv("user_information.csv")
+    df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
+    date = input("Please enter the date of the log (YYYY-MM-DD), then press <Enter>: ")
+    search_date = dt.datetime.strptime(date, "%Y-%m-%d")
+    current_date = dt.datetime.now()
+    if search_date > current_date:
+      raise InvalidDateError()
+    filtered_df = df[df['Log Date'] == search_date]
+    if filtered_df.empty == True:
+      raise EmptyDataError()
+    print(filtered_df)
+    return filtered_df
 
-# def log_search_week():
-#   df = pd.read_csv("user_information.csv")
-#   df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
-#   # if start_date < dt.datetime.now():
-#   #   raise DateInputError()
-#   start_date_raw = input("Please enter a date to backtrack from in (YYYY-MM-DD), then press <Enter> : ")
-#   start_date = dt.datetime.strptime(start_date_raw, '%Y-%m-%d')
-#   print(start_date)
+def log_search_week():
+  df = pd.read_csv("user_information.csv")
+  df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
+  start_date_raw = input("Please enter a date to backtrack from in (YYYY-MM-DD), then press <Enter> : ")
+  start_date = dt.datetime.strptime(start_date_raw, '%Y-%m-%d')
+  if start_date > dt.datetime.now():
+    raise InvalidDateError()
+  end_date = start_date - timedelta(days=7)
+  print(f'This search outputs sleep logs ranging from {start_date} to {end_date}.')
+  mask = (df['Log Date'] >= end_date) & (df['Log Date'] <= start_date) # greater than the start date and smaller than the end date
+  df2 = df.loc[mask]
+  if df2.empty == True:
+    raise EmptyDataError()
+  print(df2)
+  return df2
 
-#   end_date = start_date - timedelta(days=7)
-#   print(end_date)
-#   # print("This search will range from {start_date} to {end_date}. Press <Enter> to continue")
-#   # end_date_raw =
-#   mask = (df['Log Date'] >= end_date) & (df['Log Date'] <= start_date) # greater than the start date and smaller than the end date
-#   df2 = df.loc[mask]
-#   print(df2)
-#   return df2
-
-# def end_application():
-#   print("Thank you for using Snooze It! Please come back again soon!")
+def end_application():
+  print("Thank you for using Snooze It! Please come back again soon!")
 
 def main_menu():
   print("\nPlease Choose From the Following Options:\n"
@@ -187,7 +185,7 @@ while True:
       except ValueError as e:
         print(type(e))
         if("does not match format '%Y-%m-%d'" in str(e)):
-          print("Incorrect Date Format Entered. Please enter date format within the format (YYYY-MM-DD), using numbers separated by '-' only.")
+          print("Incorrect Date Format Entered. Please enter a date format within (YYYY-MM-DD) using numbers separated by '-' only.")
       except InvalidDateError as e:
         print(type(e))
         print(e)
@@ -198,13 +196,16 @@ while True:
       print("You have chosen to view a week period of sleep logs")
       try:
         log_period = log_search_week()
-      except DateInputError as e:
+      except InvalidDateError as e:
         print(type(e))
         print(e)
       except ValueError as e:
         print(type(e))
         if("does not match format '%Y-%m-%d'" in str(e)):
-          print("Incorrect Date Format Entered. Please enter date format within the format (YYYY-MM-DD), using numbers separated by '-' only.")
+          print("Incorrect Date Format Entered. Please enter a date format within (YYYY-MM-DD) using numbers separated by '-' only.")
+      except EmptyDataError as e:
+        print(type(e))
+        print(e)
     elif search_choice == 'End Application':
       print("You have chosen to End Application")
       log_period = end_application()
