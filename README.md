@@ -91,17 +91,17 @@ __Feature 2 - Ouput Previous Sleep Log (High Priority)__
 7. If NotMatchFound, Print NoInputError & Print EmptyLog
 8. Return to MainMenuLogSearchOptions
 
-__Feature 3 - Output Previous 7 Days Sleep Logs from Current Day(High Priority)__
+__Feature 3 - Output Previous 7 Days Sleep Logs from Current Day (High Priority)__
 
 1. Create ReadCSV object of User_Information using DataFrame Feature of Pandas Module. 
-2. PromptUser To Enter StartDate (DD-MM-YYYY)
-3. PromptUser To Enter EndDate (DD-MM-YYYY)
-4. Check if StartDate to EndDate = 7 Days, if not, PromptUser with LogPeriodError & Repeat From Step 2 Until CorrectPeriod Obtained
-5. Filter StartDate <= LogDates In ExistingUserInformation.Csv <= EndDate with Pandas DataFrameFunctionality
-6. Locate Rows Within PandasDataFrame
+2. PromptUser To Enter StartDate (DD-MM-YYYY).
+3. LimitSearchDate to 7ConsecutiveDates BeforeCurrentDate. 
+	 End_date = dt.datetime.now() - time.delta(day=7)
+4. PrintToUser (The StartDateSearch is {StartDate} and EndDateSearch is {EndDate}).
+5. Filter LogDates <= StartDate & LogDates >= EndDate using DataFrames.Mask Functionality In ExistingUserInformation.Csv
+6. Locate / Read Rows With PandasDataFrame
 7. Print Output of SleepLogs Onto UserTerminal 
-6. If NoMatchFound, Print EmptyDataFrameError & Print EmptyLog
-7. Return to MainMenuLogSearchOptions
+8. Return to MainMenuLogSearchOptions
 
 __Feature 4 - Ouput Sleep Tip (High Priority)__
 
