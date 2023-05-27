@@ -41,12 +41,6 @@ def user_input():
     raise RangeError()
 
   date = dt.date(year, month, day)
-  print(date)
-    
-  # with open("user_information.csv", "r") as f:
-  #   file_reader = csv.DictReader(f, delimiter=';')
-  #   if file_reader.logdate == date:
-  #     raise DateExistsError()
 
   hours_of_sleep = float(input("How many hours did you sleep? (Press <Enter> to continue): "))
 
@@ -71,7 +65,6 @@ def user_input():
     raise InvalidInputError()
   
   journal = input("Would you like to enter a sleep journal? \n(Enter (Y/N) & press <Enter> to continue):\n ")
-
   if caffeine.upper() != "Y" and caffeine.upper() != "N":
       raise InvalidInputError()
 
@@ -119,7 +112,7 @@ def log_search_week():
     raise InvalidDateError()
   end_date = start_date - timedelta(days=7)
   print(f'We have found the following sleep logs ranging from {start_date} to {end_date}:')
-  mask = (df['Log Date'] >= end_date) & (df['Log Date'] <= start_date) # greater than the start date and smaller than the end date
+  mask = (df['Log Date'] > end_date) & (df['Log Date'] <= start_date) # greater than the start date and smaller than the end date
   df2 = df.loc[mask]
   if df2.empty == True:
     raise EmptyDataError()
@@ -152,12 +145,14 @@ while True:
       try:
         date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry = user_input()
         write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry)
-      # except ValueError as e:
-      #   print(type(e))
-      #   if('invalid literal for int()' in str(e)):
-      #     print("An invalid character(s) has been entered. Please enter numbers only")
-      #   if('day is out of range for month' in str(e)):
-      #     print("Day is out of range for month. Please enter correct dates for the month")
+      except ValueError as e:
+        print(type(e))
+        if('invalid literal for int()' in str(e)):
+          print("An invalid character(s) has been entered. Please enter numbers only")
+        if('day is out of range for month' in str(e)):
+          print("Day is out of range for month. Please enter correct dates for the month")
+        if('could not convert string to float' in str(e)):
+          print("An invalid character(s) has been entered. Please enter numbers only.")
       except InvalidYearError as e:
         print(type(e))
         print(e)
