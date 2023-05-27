@@ -25,15 +25,15 @@ The application allows users to register for an account and save their sleep inf
 Existing users can also log in using their credentials to access their personal information.  
 
 ### 1. Log Daily Sleep Times & Factors Affecting Sleep
-Users are able to log in sleep time every day and keep track of the quality of their sleep, whether they had a goodnight's sleep or they didn't, rating it from 1-10.
+Users are able to log in sleep time every day and keep track of the quality of their sleep, whether they had a goodnight's sleep or they didn't, rating it from 0 (No sleep) - 10 (Excellent).
 The application allows users to write down comments and factors during the day or during the night before they slept that could impact the user's sleep.
 
 ### 2. Sleep Report (1 Day)
-Gives user a report of their sleep time, quality, and other associated sleep information including a journal of a desired date. Users input a desired date and the information of their sleep conditions will be displayed on their terminal. 
+Gives user a report of their sleep time, quality, and other associated sleep information including a journal of a set date. Users input a desired date and the information of their sleep conditions will be displayed on their terminal. 
 
 ### 3. Sleep Report before current date (Up to 7 consecutive days)
-Gives users a report of their sleep time, quality and other relevant sleep information over a period of 1 week period before current date. The 1 week period can be specified through user inputs of the desired start date and end date. Available sleep logs saved in the system will be displayed to the user as a terminal output. 
-Note: The 1 week period specified will include the start date and the end date defined by the user, if a log for those dates exist in record.   
+Gives users a report of their sleep time, quality and other relevant sleep information over a period of 1 week period before current date. The 1 week period can be specified through user inputs of the desired start date and end date. Available sleep logs saved in the system will be displayed to the user as a terminal output.
+Note: The 1 week period specified will include the start date and the end date defined by the user, if a log for those dates exist in record.
 
 ### 3. Suggest Tips on better Sleep
 Upon the completion of a sleep log entry, user's will be given a sleep tip on their terminal window to help them gain ample quantity and quality sleep for a more productive day.
@@ -154,6 +154,18 @@ https://docs.python.org/3/library/csv.html#reader-objects
 
 
 ## Further Development of Application
+
+__Further Improvements in Feature 1__
+
+Users are able to make duplicate entries of the same date within the csv file and the search 
+ability will be able to identify these duplicates upon a week search prompt. Due to the time constraints and skill constraints of the project, this problem has not been solved and overcome. 
+The best solution to overcome duplication is to check using the single date search if an entry of a certain date has been made in the system first and from there decide to write an entry for that date or not.
+
+Another alternative solution to this is to further enhance the application by limiting the sleep log entry to just the day's date otherwise they miss out on the chance to submit a sleep log.
+
+Would also like to implement a delete feature if possible for this system to enable users to append entries in the case mistakes are detected in any logs. 
+
+__Extra Features__
 
 If time permitted, the application could have a login feature where each user could have individual access to their own sleep information in separate accounts, allowing for separation of sleep logs to tailor an individual's search function and enhance the privacy of an individual's sleep journals and logs. 
 
