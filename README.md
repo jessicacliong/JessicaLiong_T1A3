@@ -301,7 +301,7 @@ Pseudocode for Feature 5 - User Login Feature
 
  Login Feature (If Time Permiting)__  
 
-1. Log In Menu, Prompts 2 Options:
+Log In Menu, Prompts 2 Options:
 	a. Create NewUser
 	b. Login As Existing User
 
