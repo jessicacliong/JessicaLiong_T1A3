@@ -105,15 +105,15 @@ def log_search_day():
 
 def log_search_week():
   df = pd.read_csv("user_information.csv")
-  df2 = pd.to_datetime(df['Log Date'], format='%Y-%m-%d')
+  df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d')
   start_date_raw = input("Please enter a date to backtrack from in (YYYY-MM-DD), then press <Enter> : ")
   start_date = dt.datetime.strptime(start_date_raw, '%Y-%m-%d')
   if start_date > dt.datetime.now():
     raise InvalidDateError()
   end_date = start_date - timedelta(days=7)
-  mask = (df2 <= start_date) & (df2 > end_date)
-  df3 = df.loc[mask]
-  if df3.empty == True:
+  mask = (df['Log Date'] <= start_date) & (df['Log Date'] > end_date)
+  df2 = df.loc[mask]
+  if df2.empty == True:
     raise EmptyDataError()
   print(f'We have found the following sleep logs ranging from {start_date} to {end_date}:')
   print(df2)
