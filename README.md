@@ -112,45 +112,164 @@ __Feature 4 - Ouput Sleep Tip (High Priority)__
 
 ## Installation Instructions
 
+This terminal application is currently only supported on Linux and macOS (as simple-term-menu is not compatible with Windows Terminal/Powershell). Windows 10 users are still able to use this application but must run the application through the Windows Subsystem for Linux (WSL) (Ubuntu). 
+
+__Windows__
+
+### Step 1: Open the terminal
+
+If you are a Windows user without a WSL, download and install Ubuntu version 22.04 (or the latest version available) of WSL from the Microsoft Store.
+
+Once installed, it will prompt a username and password to enter. This is a unique username and password for your Ubuntu environment and is not related to your Windows system username and password. Pick a username without spaces or special characters in it that is easy to type and remember. Choose a password you will remember easily as this information will be used frequently to install tools in the system. 
+Refer to this website for more detailed instructions: [WSL Installation Instructions](https://janelbrandon.medium.com/a-guide-for-using-wsl-for-development-d135670313a)
+
+After installing WSL, please follow the Linux installation instructions to set up your system correctly.
+
+### Step 2: Check the version of Python installed in your computer and (as necessary) download/update Python.
+
+__Linux Systems__
+
+Python should already be installed on most Linux systems automatically. To check the current version in your system, open a terminal and run the following command:
+
+```python
+
+python3 --version
+
+```
+
+If your system's version less than 3.6, please update Python using the following commands:
+
+```python
+
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.10
+
+```
+
+You can verify the installation by running the following command:
+
+```python
+
+$ python3.10 --version
+
+```
+
+__MacOS__
+
+On Mac, the recommended way to install python is to utilise the official Python.org installer. Instructions can be found [here](https://www.jcchouinard.com/install-python-on-macos/#:~:text=Install%20Python%20with%20Package%20Installer,-The%20best%20place&text=Go%20to%20Python.org%20and,through%20each%20of%20the%20prompts.).
+
+__Step 3: Locate a folder where you would like to save the terminal application.__
+
+__Step 4: Once inside the folder, clone the repository from Github using the following command:__
+
+```
+
+git clone https://github.com/jessicacliong/JessicaLiong_T1A3.git
+
+```
+
+This will clone the repository of the application from the following window on github:
+
+![Github Repository](/docs/Github_Respository.png)
+
+__Step 5: Open the folder that contains the application:__
+
+```
+
+cd JessicaLiong_T1A3
+
+```
+
+Step 5: Run the following executable
+
+```
+bash run_application.sh
+```
+
+This will automatically run the bash script below and will also automate the following actions:
+
+- Ensure you have python version 3 installed on your system and prompts a warning message if not available
+- Create a virtual environment using the standard name .venv.
+- Activate the created virtual environment
+- Install all dependencies of the application stored within a requirements.txt file for the user
+- Run the python file
+- Deactivation of the virtual environment upon completion of running the application.
+
+```
+cd ./src;
+if [[ -x "$(command -v python3)" ]]
+then
+  pyv="$(python -V 2>&1)"
+  if [[ $pyv == "Python 3"* ]]
+  then
+    echo "The correct version of Python installed. Let's continue!"
+  else
+    echo "The version of Python installed is an oudated version. Please update to the latest version of Python and attempt Step 5 again." >&2
+  fi
+else
+  echo "Python is not installed in your system. Please install Python version 3.10 (at least) to run this application!" >&2
+fi
+echo "First, I will create a virtual environment using the name .venv"
+python3 -m venv .venv
+echo "Now, I will install all dependencies required for the application to run smoothly."
+pip install -r ./requirements.txt
+echo "Now, we will run the python file for the application."
+python3 ./main.py
+deactivate
+```
+
+
 ## Dependencies
+
+exceptiongroup==1.1.1
+iniconfig==2.0.0
+numpy==1.24.3
+packaging==23.1
+pandas==2.0.1
+pluggy==1.0.0
+pytest==7.3.1
+python-dateutil==2.8.2
+pytz==2023.3
+simple-term-menu==1.6.1
+six==1.16.0
+tomli==2.0.1
+tzdata==2023.3
 
 ## References
 
 __Python Coding__
 
-https://automatetheboringstuff.com/2e/chapter16/
+Automate the Boring Stuff with Python (n.d.). Chapter 16: Working with CSV Files. Retrieved from https://automatetheboringstuff.com/2e/chapter16/
 
-Inserting Input into CSV
-https://stackoverflow.com/questions/55980027/building-a-csv-based-on-user-input
+Stack Overflow (n.d.). Inserting Input into CSV. Retrieved from https://stackoverflow.com/questions/55980027/building-a-csv-based-on-user-input
 
-File Handling Lecture - Harvard University
-https://cs50.harvard.edu/python/2022/notes/6/
+Harvard University, CS50 (2022). File Handling Lecture. Retrieved from https://cs50.harvard.edu/python/2022/notes/6/
 
-PEP-8 Documentation
-https://peps.python.org/pep-0008/
+Python Software Foundation (n.d.). PEP 8 -- Style Guide for Python Code. Retrieved from https://peps.python.org/pep-0008/
 
-Python Date String Testing
-https://stackoverflow.com/questions/18610884/python-date-string-testing
+Stack Overflow (n.d.). Python Date String Testing. Retrieved from https://stackoverflow.com/questions/18610884/python-date-string-testing
 
-Writing & Reading CSV file Python
-https://stackoverflow.com/questions/14978575/writing-reading-the-same-csv-file-in-python
+Stack Overflow (n.d.). Writing & Reading CSV file Python. Retrieved from https://stackoverflow.com/questions/14978575/writing-reading-the-same-csv-file-in-python
 
-Printing data using DataFrames in Pandas
-https://stackoverflow.com/questions/64817406/fetching-particular-rows-of-a-csv-file-where-date-matches-as-entered-by-user
+Stack Overflow (n.d.). Printing data using DataFrames in Pandas. Retrieved from https://stackoverflow.com/questions/64817406/fetching-particular-rows-of-a-csv-file-where-date-matches-as-entered-by-user
 
-DateTime in Pandas: An Uncomplicated Guide (2023)
-https://www.dataquest.io/blog/datetime-in-pandas/#:~:text=Now%2C%20the%20data%20type%20of,precision%20of%20the%20DateTime%20object.
+Dataquest (2023). DateTime in Pandas: An Uncomplicated Guide. Retrieved from https://www.dataquest.io/blog/datetime-in-pandas/#:~:text=Now%2C%20the%20data%20type%20of,precision%20of%20the%20DateTime%20object.
 
-Searching Records between 2 dates in CSV File
-https://stackoverflow.com/questions/62058695/searching-for-records-between-two-dates-and-two-times-in-csv-file-using-python-p
+Stack Overflow (n.d.). Searching Records between 2 dates in CSV File. Retrieved from https://stackoverflow.com/questions/62058695/searching-for-records-between-two-dates-and-two-times-in-csv-file-using-python-p
+
 
 __Testing__
 
-Exceptions Documentation
-https://docs.python.org/3/library/exceptions.html#Exception
+Python Software Foundation. (n.d.). Exceptions - Python 3.9.7 documentation. Retrieved from https://docs.python.org/3/library/exceptions.html#Exception
 
-CSV Documentation
-https://docs.python.org/3/library/csv.html#reader-objects
+Python Software Foundation. (n.d.). CSV - Python 3.9.7 documentation. Retrieved from https://docs.python.org/3/library/csv.html#reader-objects
+
+
+__Help Documentation__
+
+cloudbytes.dev. (n.d.). Upgrade Python to Latest Version on Ubuntu/Linux. Retrieved from https://cloudbytes.dev/snippets/upgrade-python-to-latest-version-on-ubuntu-linux
+
 
 
 ## Further Development of Application

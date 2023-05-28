@@ -20,7 +20,7 @@ def user_input():
   if year > currentYear or year < 2023 or year > 9999:
     raise InvalidYearError()
 
-  month = int(input("Please enter the month of the log (MM): "))
+  month = int(input("Please enter the month of the log (M / MM): "))
   currentMonth = dt.datetime.now().month
 
   if type(month) is not int:
@@ -30,7 +30,7 @@ def user_input():
   if month < 1:
     raise RangeError()
 
-  day = int(input("Please enter the date of the log (DD): "))
+  day = int(input("Please enter the date of the log (D / DD): "))
   currentDate = dt.datetime.now().day
 
   if type(day) is not int:
@@ -59,13 +59,13 @@ def user_input():
     raise NegativeError()
   if type(quality_of_sleep) is not int:
     raise ValueError()
-  
+
   caffeine = input("Did you have any coffee in the afternoon/evening? \n(Enter (Y/N) & press <Enter> to continue):\n ")
   if caffeine.upper() != "Y" and caffeine.upper() != "N":
     raise InvalidInputError()
-  
+
   journal = input("Would you like to enter a sleep journal? \n(Enter (Y/N) & press <Enter> to continue):\n ")
-  if caffeine.upper() != "Y" and caffeine.upper() != "N":
+  if journal.upper() != "Y" and journal.upper() != "N":
       raise InvalidInputError()
 
   if journal == 'N':
@@ -80,7 +80,7 @@ def write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, 
     headers = ['Log Date', 'Hours of Sleep', 'Quality of Sleep (1-10)', 'Caffeine Intake', 'Write Journal', 'Journal Entry']
     outputDictWriter = csv.DictWriter(file, headers)
     outputDictWriter.writerow({'Log Date': date, 'Hours of Sleep': hours_of_sleep, 'Quality of Sleep (1-10)': quality_of_sleep, 'Caffeine Intake': caffeine, 'Write Journal': journal, 'Journal Entry': journal_entry})
-    print("Thank you for using Snooze It. Your data has been saved! ")
+    print("Thank you for using Snooze It. Your data has been saved!")
 
 def sleep_tip():
   with open("sleep_tips.csv", "r") as f:
@@ -89,33 +89,33 @@ def sleep_tip():
   print(f'\nSleep Tip: {random.choice(sleep_tips)}\n')
 
 def log_search_day():
-    df = pd.read_csv("user_information.csv")
-    df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
-    date = input("Please enter the date of the log (YYYY-MM-DD), then press <Enter>: ")
-    search_date = dt.datetime.strptime(date, "%Y-%m-%d")
-    current_date = dt.datetime.now()
-    if search_date > current_date:
-      raise InvalidDateError()
-    print(f'We have found a log for the {search_date}:')
-    filtered_df = df[df['Log Date'] == search_date]
-    if filtered_df.empty == True:
-      raise EmptyDataError()
-    print(filtered_df)
-    return filtered_df
+  df = pd.read_csv("user_information.csv")
+  df2 = pd.to_datetime(df['Log Date'], format='%Y-%m-%d')
+  date = input("Please enter the date of the log (YYYY-MM-DD), then press <Enter>: ")
+  search_date = dt.datetime.strptime(date, "%Y-%m-%d")
+  current_date = dt.datetime.now()
+  if search_date > current_date:
+    raise InvalidDateError()
+  filtered_df = df[df2 == search_date]
+  if filtered_df.empty == True:
+    raise EmptyDataError()
+  print(f'We have found the following log for the {search_date}:')
+  print(filtered_df)
+  return filtered_df
 
 def log_search_week():
   df = pd.read_csv("user_information.csv")
-  df['Log Date'] = pd.to_datetime(df['Log Date'], format='%Y-%m-%d') # converts data type into a datetime64[ns] object
+  df2 = pd.to_datetime(df['Log Date'], format='%Y-%m-%d')
   start_date_raw = input("Please enter a date to backtrack from in (YYYY-MM-DD), then press <Enter> : ")
   start_date = dt.datetime.strptime(start_date_raw, '%Y-%m-%d')
   if start_date > dt.datetime.now():
     raise InvalidDateError()
   end_date = start_date - timedelta(days=7)
-  print(f'We have found the following sleep logs ranging from {start_date} to {end_date}:')
-  mask = (df['Log Date'] > end_date) & (df['Log Date'] <= start_date) # greater than the start date and smaller than the end date
-  df2 = df.loc[mask]
-  if df2.empty == True:
+  mask = (df2 > end_date) & (df2 <= start_date)
+  df3 = df.loc[mask]
+  if df3.empty == True:
     raise EmptyDataError()
+  print(f'We have found the following sleep logs ranging from {start_date} to {end_date}:')
   print(df2)
   return df2
 
@@ -132,85 +132,83 @@ def main_menu():
                     "View Previous 1 Week Sleep Log",
                     "End Application",
                   ]
-  while True:
-    terminal_menu = TerminalMenu(search_options)
-    search_entry_index = terminal_menu.show()
-    search_choice = search_options[search_entry_index]
-    return search_choice
+  terminal_menu = TerminalMenu(search_options)
+  search_entry_index = terminal_menu.show()
+  search_choice = search_options[search_entry_index]
+  return search_choice
 
 while True:
-    search_choice = main_menu()
-    if search_choice == "Enter A New Sleep Log":
-      print("You have chosen to enter a new sleep log")
-      try:
-        date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry = user_input()
-        write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry)
-      except ValueError as e:
-        print(type(e))
-        if('invalid literal for int()' in str(e)):
-          print("An invalid character(s) has been entered. Please enter numbers only")
-        if('day is out of range for month' in str(e)):
-          print("Day is out of range for month. Please enter correct dates for the month")
-        if('could not convert string to float' in str(e)):
-          print("An invalid character(s) has been entered. Please enter numbers only.")
-      except InvalidYearError as e:
-        print(type(e))
-        print(e)
-      except RangeError as e:
-        print(type(e))
-        print(e)
-      except NumberInputError as e:
-        print(type(e))
-        print(e)
-      except NegativeError as e:
-        print(type(e))
-        print(e)
-      except InvalidMonthError as e:
-        print(type(e))
-        print(e)
-      except InvalidDateError as e:
-        print(type(e))
-        print(e)
-      except SleepTimeError as e:
-        print(type(e))
-        print(e)
-      except InvalidInputError as e:
-        print(type(e))
-        print(e)
-      except DateExistsError as e:
-        print(type(e))
-        print(e)
-      else:
-        sleep_tip()
-    elif search_choice == "View Previous Single Night Sleep Log":
-      print("You have chosen to view a previous sleep log")
-      try:
-        log_period = log_search_day()
-      except ValueError as e:
-        print(type(e))
-        if("does not match format '%Y-%m-%d'" in str(e)):
-          print("Incorrect Date Format Entered. Please enter a date format within (YYYY-MM-DD) using numbers separated by '-' only.")
-      except InvalidDateError as e:
-        print(type(e))
-        print(e)
-      except EmptyDataError as e:
-        print(type(e))
-        print(e)
-    elif search_choice == "View Previous 1 Week Sleep Log":
-      print("You have chosen to view a week period of sleep logs")
-      try:
-        log_period = log_search_week()
-      except InvalidDateError as e:
-        print(type(e))
-        print(e)
-      except ValueError as e:
-        print(type(e))
-        if("does not match format '%Y-%m-%d'" in str(e)):
-          print("Incorrect Date Format Entered. Please enter a date format within (YYYY-MM-DD) using numbers separated by '-' only.")
-      except EmptyDataError as e:
-        print(type(e))
-        print(e)
-    elif search_choice == 'End Application':
-      print("You have chosen to End Application")
-      log_period = end_application()
-      break
+  search_choice = main_menu()
+  if search_choice == "Enter A New Sleep Log":
+    print("You have chosen to enter a new sleep log")
+    try:
+      date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry = user_input()
+      write_user_input(date, hours_of_sleep, quality_of_sleep, caffeine, journal, journal_entry)
+    except ValueError as e:
+      print(type(e))
+      if('invalid literal for int()' in str(e)):
+        print("An invalid character(s) has been entered. Please enter numbers only")
+      if('day is out of range for month' in str(e)):
+        print("Day is out of range for month. Please enter correct dates for the month")
+      if('could not convert string to float' in str(e)):
+        print("An invalid character(s) has been entered. Please enter numbers only.")
+    except InvalidYearError as e:
+      print(type(e))
+      print(e)
+    except RangeError as e:
+      print(type(e))
+      print(e)
+    except NumberInputError as e:
+      print(type(e))
+      print(e)
+    except NegativeError as e:
+      print(type(e))
+      print(e)
+    except InvalidMonthError as e:
+      print(type(e))
+      print(e)
+    except InvalidDateError as e:
+      print(type(e))
+      print(e)
+    except SleepTimeError as e:
+      print(type(e))
+      print(e)
+    except InvalidInputError as e:
+      print(type(e))
+      print(e)
+    except DateExistsError as e:
+      print(type(e))
+      print(e)
+    else:
+      sleep_tip()
+  elif search_choice == "View Previous Single Night Sleep Log":
+    print("You have chosen to view a previous sleep log")
+    try:
+      log_period = log_search_day()
+    except ValueError as e:
+      if("does not match format '%Y-%m-%d'" in str(e)):
+        print("Incorrect Date Format Entered. Please enter a date format within (YYYY-MM-DD) using numbers separated by '-' only.")
+    except InvalidDateError as e:
+      print(type(e))
+      print(e)
+    except EmptyDataError as e:
+      print(type(e))
+      print(e)
+  elif search_choice == "View Previous 1 Week Sleep Log":
+    print("You have chosen to view a week period of sleep logs")
+    try:
+      log_period = log_search_week()
+    except InvalidDateError as e:
+      print(type(e))
+      print(e)
+    except ValueError as e:
+      print(type(e))
+      if("does not match format '%Y-%m-%d'" in str(e)):
+        print("Incorrect Date Format Entered. Please enter a date format within (YYYY-MM-DD) using numbers separated by '-' only.")
+    except EmptyDataError as e:
+      print(type(e))
+      print(e)
+  elif search_choice == 'End Application':
+    print("You have chosen to End Application")
+    log_period = end_application()
+    break
