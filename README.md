@@ -110,52 +110,16 @@ __Feature 4 - Display A Sleep Tip (High Priority)__
 3. Randomise Row
 4. After SleepInformationInput Made, Print Random SleepingTip onto UserTerminal 
 
-## Installation Instructions
+## Help Instructions (For MacOS only)
 
-This terminal application is currently only supported on Linux and macOS (as simple-term-menu is not compatible with Windows Terminal/Powershell). Windows 10 users are still able to use this application but must run the application through the Windows Subsystem for Linux (WSL) (Ubuntu). 
+To run this application, users can use any operating system they wish as long as it supports a Terminal or Command Line Interface.
+If you are a Windows user, we recommend utilising the Ubuntu terminal by installing the Windows Subsystem for Linux (WSL).
 
-__Windows__
+The instructions below are just for Mac operating systems only.  
 
-### Step 1: Open the terminal
-
-If you are a Windows user without a WSL, download and install Ubuntu version 22.04 (or the latest version available) of WSL from the Microsoft Store.
-
-Once installed, it will prompt a username and password to enter. This is a unique username and password for your Ubuntu environment and is not related to your Windows system username and password. Pick a username without spaces or special characters in it that is easy to type and remember. Choose a password you will remember easily as this information will be used frequently to install tools in the system. 
-Refer to this website for more detailed instructions: [WSL Installation Instructions](https://janelbrandon.medium.com/a-guide-for-using-wsl-for-development-d135670313a)
-
-After installing WSL, please follow the Linux installation instructions to set up your system correctly.
+### Step 1: Open the system terminal
 
 ### Step 2: Check the version of Python installed in your computer and (as necessary) download/update Python.
-
-__Linux Systems__
-
-Python should already be installed on most Linux systems automatically. To check the current version in your system, open a terminal and run the following command:
-
-```python
-
-python3 --version
-
-```
-
-If your system's version less than 3.6, please update Python using the following commands:
-
-```python
-
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt-get update
-sudo apt-get install python3.10
-
-```
-
-You can verify the installation by running the following command:
-
-```python
-
-$ python3.10 --version
-
-```
-
-__MacOS__
 
 On Mac, the recommended way to install python is to utilise the official Python.org installer. Instructions can be found [here](https://www.jcchouinard.com/install-python-on-macos/#:~:text=Install%20Python%20with%20Package%20Installer,-The%20best%20place&text=Go%20to%20Python.org%20and,through%20each%20of%20the%20prompts.).
 
@@ -169,7 +133,7 @@ git clone https://github.com/jessicacliong/JessicaLiong_T1A3.git
 
 This will clone the repository of the application from the following window on github:
 
-![Github Repository](/docs/Github_Respository.png)
+![Github Repository](/docs/github_respository.png)
 
 __Step 5: Open the folder that contains the application:__
 
@@ -183,7 +147,7 @@ Step 5: Run the following executable
 bash run_application.sh
 ```
 
-This will automatically run the bash script below and will also automate the following actions:
+This will automatically run the bash script contained in the folder and will also automate the following actions:
 
 - Ensure you have python version 3 installed on your system and prompts a warning message if not available
 - Create a virtual environment using the standard name .venv.
@@ -192,28 +156,30 @@ This will automatically run the bash script below and will also automate the fol
 - Run the python file
 - Deactivation of the virtual environment upon completion of running the application.
 
+
+__Note:__
+
+If running Step 5 does not work, type the following command and retry Step 5 again.
+
 ```
-cd ./src;
-if [[ -x "$(command -v python3)" ]]
-then
-  pyv="$(python -V 2>&1)"
-  if [[ $pyv == "Python 3"* ]]
-  then
-    echo "The correct version of Python installed. Let's continue!"
-  else
-    echo "The version of Python installed is an oudated version. Please update to the latest version of Python and attempt Step 5 again." >&2
-  fi
-else
-  echo "Python is not installed in your system. Please install Python version 3.10 (at least) to run this application!" >&2
-fi
-echo "First, I will create a virtual environment using the name .venv"
-python3 -m venv .venv
-echo "Now, I will install all dependencies required for the application to run smoothly."
-pip install -r ./requirements.txt
-echo "Now, we will run the python file for the application."
-python3 ./main.py
-deactivate
+chmod +x run_application.sh
 ```
+
+## System Requirements
+
+Snooze It is designed to run on Windows, Mac OS X and Linux.
+
+__Minimum Specifications__
+
+Snooze It won't run properly with all it's features unless you have at least the following:
+
+64-bit processor & operating system
+4 GB RAM (for browsing images, limited analysis)
+300 MB hard disk space
+
+Snooze It has been developed and tested regularly on the following system:
+
+2021 Retina 16-inch Macbook Pro, Apple M1 Pro Chip, 16GB Unified Memory, 512GB SSD
 
 
 ## Dependencies
