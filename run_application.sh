@@ -1,9 +1,9 @@
 #!/bin/bash
 cd ./src;
-if [[ -x "$(command -v python3)" ]]
+if [[ -x "$(command -v python3.10)" ]]
 then
   pyv="$(python -V 2>&1)"
-  if [[ $pyv == "Python 3"* ]]
+  if [[ $pyv == "Python 3.10"* ]]
   then
     echo "The correct version of Python installed. Let's continue!"
   else

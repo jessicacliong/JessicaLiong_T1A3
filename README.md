@@ -20,10 +20,6 @@ The application is targeted for users of any age and gender who is able to run t
 
 ## Features
 
-### 1. Utilise an Account
-The application allows users to register for an account and save their sleep information. 
-Existing users can also log in using their credentials to access their personal information.  
-
 ### 1. Log Daily Sleep Times & Factors Affecting Sleep
 Users are able to log in sleep time every day and keep track of the quality of their sleep, whether they had a goodnight's sleep or they didn't, rating it from 0 (No sleep) - 10 (Excellent).
 The application allows users to write down comments and factors during the day or during the night before they slept that could impact the user's sleep.
@@ -35,7 +31,7 @@ Gives user a report of their sleep time, quality, and other associated sleep inf
 Gives users a report of their sleep time, quality and other relevant sleep information over a period of 1 week period before current date. The 1 week period can be specified through user inputs of the desired start date and end date. Available sleep logs saved in the system will be displayed to the user as a terminal output.
 Note: The 1 week period specified will include the start date and the end date defined by the user, if a log for those dates exist in record.
 
-### 3. Suggest Tips on better Sleep
+### 4. Suggest Tips on better Sleep
 Upon the completion of a sleep log entry, user's will be given a sleep tip on their terminal window to help them gain ample quantity and quality sleep for a more productive day.
 
 ## Implementation Plan
@@ -44,10 +40,7 @@ To implement the development steps of my application, I utilised Trello to keep 
 
 Every time a task is completed, the date deadline box can be clicked to give a green box with a tick, which marks the task as completed on trello. 
 
-Figure 1 shows my trello board on the 6th of May
-
-Figure 4 shows my trello board on the 22nd of May
-
+The link to my Trello can be found in the project management link below the title of this READme Documentation.
 
 ## Psuedocodes
 
