@@ -111,7 +111,7 @@ def log_search_week():
   if start_date > dt.datetime.now():
     raise InvalidDateError()
   end_date = start_date - timedelta(days=7)
-  mask = (df2 > end_date) & (df2 <= start_date)
+  mask = (df2 <= start_date) & (df2 > end_date)
   df3 = df.loc[mask]
   if df3.empty == True:
     raise EmptyDataError()
