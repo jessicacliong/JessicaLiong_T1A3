@@ -80,7 +80,7 @@ __Log Search Main Menu__
 5. If UserSelection = b, Run Feature3
 6. If UserSelection = c, TermimateApplication
 
-__Feature 2 - Ouput Previous Sleep Log (High Priority)__
+__Feature 2 - Display Previous Sleep Log (High Priority)__
 
 1. Import PandasModule
 2. Create ReadCSV object of User_Information using DataFrame Feature of Pandas Module. 
@@ -91,7 +91,7 @@ __Feature 2 - Ouput Previous Sleep Log (High Priority)__
 7. If NotMatchFound, Print NoInputError & Print EmptyLog
 8. Return to MainMenuLogSearchOptions
 
-__Feature 3 - Output Previous 7 Days Sleep Logs from Current Day (High Priority)__
+__Feature 3 - Display Previous 7 Days Sleep Logs from Current Day (High Priority)__
 
 1. Create ReadCSV object of User_Information using DataFrame Feature of Pandas Module. 
 2. PromptUser To Enter StartDate (DD-MM-YYYY).
@@ -103,7 +103,7 @@ __Feature 3 - Output Previous 7 Days Sleep Logs from Current Day (High Priority)
 7. Print Output of SleepLogs Onto UserTerminal 
 8. Return to MainMenuLogSearchOptions
 
-__Feature 4 - Ouput Sleep Tip (High Priority)__
+__Feature 4 - Display A Sleep Tip (High Priority)__
 
 1. Create ListOfSleepTips on CsvFile
 2. ReadFunction CSVModule To Read SleepingTip From Sleep_Tips.Csv File (SkippingFileHeader)
@@ -164,9 +164,7 @@ __Step 3: Locate a folder where you would like to save the terminal application.
 __Step 4: Once inside the folder, clone the repository from Github using the following command:__
 
 ```
-
 git clone https://github.com/jessicacliong/JessicaLiong_T1A3.git
-
 ```
 
 This will clone the repository of the application from the following window on github:
@@ -176,9 +174,7 @@ This will clone the repository of the application from the following window on g
 __Step 5: Open the folder that contains the application:__
 
 ```
-
 cd JessicaLiong_T1A3
-
 ```
 
 Step 5: Run the following executable
@@ -223,18 +219,31 @@ deactivate
 ## Dependencies
 
 exceptiongroup==1.1.1
+
 iniconfig==2.0.0
+
 numpy==1.24.3
+
 packaging==23.1
+
 pandas==2.0.1
+
 pluggy==1.0.0
+
 pytest==7.3.1
+
 python-dateutil==2.8.2
+
 pytz==2023.3
+
 simple-term-menu==1.6.1
+
 six==1.16.0
+
 tomli==2.0.1
+
 tzdata==2023.3
+
 
 ## References
 
