@@ -177,19 +177,9 @@ Snooze It has been developed and tested regularly on the following system:
 
 ## Dependencies
 
-exceptiongroup==1.1.1
-
-iniconfig==2.0.0
-
 numpy==1.24.3
 
-packaging==23.1
-
 pandas==2.0.1
-
-pluggy==1.0.0
-
-pytest==7.3.1
 
 python-dateutil==2.8.2
 
@@ -198,8 +188,6 @@ pytz==2023.3
 simple-term-menu==1.6.1
 
 six==1.16.0
-
-tomli==2.0.1
 
 tzdata==2023.3
 
