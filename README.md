@@ -1,12 +1,12 @@
 # Snooze It
 
-##[GitHub Respository](https://github.com/jessicacliong/JessicaLiong_T1A3)
+__[GitHub Respository](https://github.com/jessicacliong/JessicaLiong_T1A3)__
 
-##[Source Control of Respository](https://github.com/jessicacliong/JessicaLiong_T1A3/commits/main)
+__[Source Control of Respository](https://github.com/jessicacliong/JessicaLiong_T1A3/commits/main)__
 
-##[Project Management Platform](https://trello.com/b/QnfB52xz/snooze-it-application)
+__[Project Management Platform](https://trello.com/b/QnfB52xz/snooze-it-application)__
 
-##[Video Presentation](https://youtu.be/JwYR-spJ03Q)
+__[Video Presentation](https://youtu.be/JwYR-spJ03Q)__
 
 
 ## Purpose & Scope
@@ -163,7 +163,7 @@ Snooze It is an application without any images, music, sound effects, or a GUI, 
 
 Snooze It has been developed and tested regularly on the following system:
 
-2021 Retina 16-inch Macbook Pro, Apple M1 Pro Chip, 16GB Unified Memory, 512GB SSD
+2021 Retina XDR 16-inch Macbook Pro, Apple M1 Pro Chip, 16GB Unified Memory, 512GB SSD
 
 ## Dependencies
 
