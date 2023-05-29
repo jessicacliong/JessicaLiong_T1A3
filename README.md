@@ -1,19 +1,19 @@
 # Snooze It
 
-GitHub Respository: https://github.com/jessicacliong/JessicaLiong_T1A3
+##[GitHub Respository](https://github.com/jessicacliong/JessicaLiong_T1A3)
 
-Source Control of Respository: https://github.com/jessicacliong/JessicaLiong_T1A3/commits/main
+##[Source Control of Respository](https://github.com/jessicacliong/JessicaLiong_T1A3/commits/main)
 
-Project Management Platform: https://trello.com/b/QnfB52xz/snooze-it-application
+##[Project Management Platform](https://trello.com/b/QnfB52xz/snooze-it-application)
 
-Video Presentation:
+##[Video Presentation](https://youtu.be/JwYR-spJ03Q)
 
 
 ## Purpose & Scope
-Snooze It is an application that allows users to store a range of sleep information. This will save a user's sleeping hours on a daily basis, quality of sleep in accordance with other factors contributing to quality of sleep. The application will also allow users to view a summary of their sleep information over periods of a week, a month and 3 months.
+Snooze It is an application that allows users to store a range of sleep information. This will save a user's sleep related information such as sleep hours, quality of sleep in accordance with other factors contributing to quality of sleep. The application will also allow users to view a summary of their sleep information over periods of one day and up to a week maximum.
 
 The purpose of this project is to demonstrate my current skills and ability in a range of developer tools encompassing the python programming language. 
-This project will also stretch my ability to design, implement and test an application, where in this project it will be creating a terminal (command line) application. 
+This project will also stretch my ability to design, implement and test an application through the creation of a terminal (command line) application. 
 
 ## Target Audience
 The application is targeted for users of any age and gender who is able to run the application using the help documentation below on their computer terminal and log in inputs are welcome to utilise the application. 
@@ -27,12 +27,12 @@ The application allows users to write down comments and factors during the day o
 ### 2. Sleep Report (1 Day)
 Gives user a report of their sleep time, quality, and other associated sleep information including a journal of a set date. Users input a desired date and the information of their sleep conditions will be displayed on their terminal. 
 
-### 3. Sleep Report before current date (Up to 7 consecutive days)
+### 3. Sleep Report (Up to 7 consecutive days)
 Gives users a report of their sleep time, quality and other relevant sleep information over a period of 1 week period before current date. The 1 week period can be specified through user inputs of the desired start date and end date. Available sleep logs saved in the system will be displayed to the user as a terminal output.
 Note: The 1 week period specified will include the start date and the end date defined by the user, if a log for those dates exist in record.
 
 ### 4. Suggest Tips on better Sleep
-Upon the completion of a sleep log entry, user's will be given a sleep tip on their terminal window to help them gain ample quantity and quality sleep for a more productive day.
+Upon the completion of a day's sleep information entry, user's will be given a sleep tip on their terminal window to help them gain ample quantity and quality sleep for a more productive day.
 
 ## Implementation Plan
 
@@ -40,7 +40,7 @@ To implement the development steps of my application, I utilised Trello to keep 
 
 Every time a task is completed, the date deadline box can be clicked to give a green box with a tick, which marks the task as completed on trello. 
 
-The link to my Trello can be found in the project management link below the title of this READme Documentation.
+The link to my Trello can be found [here](https://trello.com/b/QnfB52xz/snooze-it-application)
 
 ## Psuedocodes
 
@@ -128,19 +128,15 @@ This will clone the repository of the application from the following window on g
 
 ![Github Repository](/docs/github_respository.png)
 
-__Step 5: Open the folder that contains the application:__
+__Step 5: Navigate to the folder that contains the repository using the terminal window__
+
+__Step 6: Once within the folder, type the following command and press enter:__
 
 ```
-cd JessicaLiong_T1A3
+./run_application.sh
 ```
 
-Step 5: Run the following executable
-
-```
-bash run_application.sh
-```
-
-This will automatically run the bash script contained in the folder and will also automate the following actions:
+This will automatically run the bash script contained in the folder and automates the following actions:
 
 - Ensure you have python version 3 installed on your system and prompts a warning message if not available
 - Create a virtual environment using the standard name .venv.
@@ -149,10 +145,9 @@ This will automatically run the bash script contained in the folder and will als
 - Run the python file
 - Deactivation of the virtual environment upon completion of running the application.
 
-
 __Note:__
 
-If running Step 5 does not work, type the following command and retry Step 5 again.
+If running Step 6 does not work, type the following command and retry Step 6 again.
 
 ```
 chmod +x run_application.sh
@@ -164,16 +159,11 @@ Snooze It is designed to run on Windows, Mac OS X and Linux.
 
 __Minimum Specifications__
 
-Snooze It won't run properly with all it's features unless you have at least the following:
-
-64-bit processor & operating system
-4 GB RAM (for browsing images, limited analysis)
-300 MB hard disk space
+Snooze It is an application without any images, music, sound effects, or a GUI, so any modern computer made within the past 10 years should be able to execute this application. 
 
 Snooze It has been developed and tested regularly on the following system:
 
 2021 Retina 16-inch Macbook Pro, Apple M1 Pro Chip, 16GB Unified Memory, 512GB SSD
-
 
 ## Dependencies
 
@@ -230,7 +220,7 @@ cloudbytes.dev. (n.d.). Upgrade Python to Latest Version on Ubuntu/Linux. Retrie
 
 ## Further Development of Application
 
-__Further Improvements in Feature 1__
+__Further Improvements of Feature 1__
 
 Users are able to make duplicate entries of the same date within the csv file and the search 
 ability will be able to identify these duplicates upon a week search prompt. Due to the time constraints and skill constraints of the project, this problem has not been solved and overcome. 
@@ -242,7 +232,7 @@ Would also like to implement a delete feature if possible for this system to ena
 
 __Extra Features__
 
-If time permitted, the application could have a login feature where each user could have individual access to their own sleep information in separate accounts, allowing for separation of sleep logs to tailor an individual's search function and enhance the privacy of an individual's sleep journals and logs. 
+If time permitted, the application could have a login feature where each user could have individual access to their own sleep information in separate accounts, allowing for separation of sleep logs to tailor an individual's search function and enhance privacy of an individual's sleep journals and logs. 
 
 Pseudocode for Feature 5 - User Login Feature
 

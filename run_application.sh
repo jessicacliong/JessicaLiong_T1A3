@@ -3,7 +3,7 @@ cd ./src;
 if [[ -x "$(command -v python3)" ]]
 then
   pyv="$(python -V 2>&1)"
-  if [[ $pyv == "Python 3"* ]]
+  if [[ $pyv == "Python 3.11"* ]]
   then
     echo "The correct version of Python is installed. Let's continue!"
   else
